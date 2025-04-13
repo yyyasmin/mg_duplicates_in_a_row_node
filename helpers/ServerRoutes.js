@@ -1,5 +1,5 @@
 const PROXY_URL = "http://localhost:5000";
-export const RENDER_PROXY_URL = "https://yyyasminallmg-production.up.railway.app/";
+export const RENDER_PROXY_URL = "https://yyyasminallmg-production.up.railway.app";
 
 /// DUMMY TO FORCE PUSH
 
