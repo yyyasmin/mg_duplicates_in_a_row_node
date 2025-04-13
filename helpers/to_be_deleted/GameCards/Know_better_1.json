@@ -1,0 +1,171 @@
+  {
+      "gameName":"gameName",
+      "id": 2,
+      "gameCards":[
+         {
+            "id":"11",
+            "name":"p1",
+            "fileFolder":"../../assets/textures/gameName/png/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p1.png",
+            "fileNameWithSufix":"p1.png",
+            "background":"red",
+            "text1":"בחר נושא שמעניין אותך ודבר עליו במשך 20 שניות",
+            "text2":"סכם בשלושה משפטים את מה שחברך למשחק אמר",
+			"text3":"Choose a topic that interests you and talk about it for 20 seconds",
+            "text4":"Summarize in three sentences what your playmate said",
+            "faceType": "back"
+
+         },
+         {
+            "id":"12",
+            "name":"p2",
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p2.png",
+            "fileNameWithSufix":"p2.png",
+            "background":"red",
+            "text1":"אמור חמישה דברים שאתה אוהב בחברך למשחק",
+            "text2":"תן 3 דוגמאות ל-איך הדברים שאמר  חברך למשחק מתבטאים",
+            "text3":"Name five things you like about your playmate",
+            "text4":"Give 3 examples of how the things your playmate said are expressed",
+            "faceType": "back"
+         },
+         {
+            "id":"13",
+            "name":"p3",
+
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p3.png",
+            "fileNameWithSufix":"p3.png",
+            "background":"red",
+            "text1":"ספר על חוויה מעצבנת שקרתה לך",
+            "text2":"חזור על מה שסיפר חברך למשחק אבל הפוך",
+            "text3":"Tell about an annoying experience that happened to you",
+            "text4":"Repeat what your playmate told but in reverse",
+            "faceType": "back"
+         },
+         {
+            "id":"14",
+            "name":"p4",
+
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p4.png",
+            "fileNameWithSufix":"p4.png",
+            "background":"red",
+            "text1":"אמור 4 דברים שהיית רוצה לעשות עם חברך למשחק השבוע",
+            "text2":"בחר 2 דברים מתוך מה שאמר חברך למשחק וקבע זמן לעשות אותם בתוך השבוע הקרוב",
+			"text3":"Name 4 things you would like to do with your playmate this week",
+            "text4":"Choose 2 things from what your playmate said and set a time to do them within the next week",
+            "faceType": "back"
+         },   
+         {
+            "id": "15",
+            "name":"p5",
+
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p5.png",
+            "fileNameWithSufix":"p5.png",
+            "background":"red",
+            "text1":"אמור 4 דברים שיהיו ביום המושלם שלך",
+            "text2":"בחר 2 דברים מתוך מה שאמר חברך למשחק ותאר איך תשתתף בהם",
+			"text3":"Name 4 things that would make your perfect day",
+            "text4":"Choose 2 things from what your playmate said and describe how you will take a part in them",
+            "faceType": "back"
+         },
+         {
+            "id": "16",
+            "name":"p6",
+
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p6.png",
+            "fileNameWithSufix":"p6.png",
+            "background":"red",
+            "text1":"אמור 4 דברים שמעוררים בך השראה בחברך למשחק",
+            "text2":"תן 2 דוגמאות לאיך מה שאמר חברך למשחק מתבטאים",
+			"text3":"Name 4 things that inspire you in your playmate",
+            "text4":"Give 2 examples of how what your playmate said shows up",
+            "faceType": "back"
+         },
+         {
+            "id": "17",
+            "name":"p7",
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p7.png",
+            "fileNameWithSufix":"p7.png",
+            "background":"red",
+            "text1":"אמור 2 דברים שמצא חן בעיניכם שחברכם למשחק עשה",
+            "text2":"תאר את הרגש שמה שאמר חברך למשחק מעורר בך",
+			"text3":"Name 2 things you liked that your playmate did",
+            "text4":"Describe the feeling that comes up by what your playmate said",
+            "faceType": "back"
+         }, 
+         {
+            "id": "18",
+            "name":"p8",
+
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p8.png",
+            "fileNameWithSufix":"p8.png",
+            "background":"red",
+            "text1":"אמור 2 משפטים שחברך למשחק אמר שהכי השפיעו עליך.",
+            "text2":"ספר מה הכי הפתיע אותך בדברים שהחבר שלך למשחק הזכיר",
+			"text3":"Say 2 sentences your playmate said that had the most impact on you.",
+            "text4":"Tell what surprised you the most about the  things your playmate mentioned",
+            "faceType": "back"
+         },	 
+         {
+            "id": "19",
+            "name":"p9",
+
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p9.png",
+            "fileNameWithSufix":"p9.png",
+            "background":"red",
+            "text1":"תאר משהו שחבר שלך למשחק היציע, והתנגדת ובסוף התברר שזה משהו טוב בשבילך",
+            "text2":"תאר משהו שחבר שלך למשחק היציע, והתנגדת ובסוף התברר שזה משהו טוב בשבילך",
+            "text3":"Describe something your playmate have done, and you resisted and in the end it turned out to be something good for you",
+            "text4":"Describe something your playmate have done, and you resisted and in the end it turned out to be something good for you",
+            "faceType": "back"
+         },		 
+         {
+            "id":"20",
+            "name":"p10",
+
+            "fileFolder":"../../assets/textures/gameName/png",
+            "fileFullPath":"../../assets/textures/gameName/png/p10.png",
+            "fileNameWithSufix":"p10.png",
+            "background":"red",
+            "text1":"אם היית חיה , איזה חיה היית? ",
+            "text2":"תן 3 דוגמאות שמתארות איך החיה שבחר חברך למשחק מתאימה לו",
+            "text3":"If you were an animal, what kind of animal would you be?",
+            "text4":"Give 3 examples that describe how the animal your friend chose for the game is suitable for him",
+            "faceType": "back"
+         },
+         {
+         "id":"21",
+         "name":"p11",
+
+         "fileFolder":"../../assets/textures/gameName/png",
+         "fileFullPath":"../../assets/textures/gameName/png/p11.png",
+         "fileNameWithSufix":"p11.png",
+         "background":"red",
+         "text1":"בחר חפץ שלדעתך יכול לייצג את האישיות שלך",
+         "text2":"תן 3 דוגמאות לאיך שהחפץ שחברך למשחק בחר מתאר אותו.",
+         "text3":"Choose an object that you think can represent your personality",
+         "text4":"Give 3 examples of how the object your playmate chose suits his personality",
+         "faceType": "back"
+         },
+         {
+         "id":"22",
+         "name":"p12",
+         "fileFolder":"../../assets/textures/gameName/png",
+         "fileFullPath":"../../assets/textures/gameName/png/p12.png",
+         "fileNameWithSufix":"p12.png",
+         "background":"red",
+         "text1":"בחר תכונה שמתאימה לך מבין: מצחיק, מפרגן, מקשיב, דעתן",
+         "text2":"תן דוגמא ל - איך התכונה שבחר חברך למשחק מאפיינת אותו",
+         "text3":"Choose a trait that suits you from: funny, accommodating, listening, opinionated",
+         "text4":"give an example for how the option that your playmate chose suits him.",
+         "faceType": "back"
+         }
+      ]
+   }
