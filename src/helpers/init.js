@@ -1,9 +1,12 @@
-import { gameName, gameNameBg } from "./GameCards/gameName.js";
-import { getToKnowYourGameMate, getToKnowYourGameMateBg } from "./GameCards/getToKnowYourGameMate.js";
-import { pesachQuestions, pesachQuestionsBg } from "./GameCards/pesachQuestions.js";
+//mport { gameName, gameNameBg } from "./GameCards/gameName.js";
+import { gameName } from "./GameCards/gameName.js";
+//import { getToKnowYourGameMate, getToKnowYourGameMateBg } from "./GameCards/getToKnowYourGameMate.js";
+import { getToKnowYourGameMate } from "./GameCards/getToKnowYourGameMate.js";
+//import { pesachQuestions, pesachQuestionsBg } from "./GameCards/pesachQuestions.js";
+import { pesachQuestions } from "./GameCards/pesachQuestions.js";
 import { CHOSEN_PROXY_URL } from "./ServerRoutes.js";
 import { pickRandom8cards, shuffle } from "./shuffle";
-import isEmpty from "./isEmpty";
+//import isEmpty from "./isEmpty";
 
 const ROOMS_PER_GAME = 8;
 
