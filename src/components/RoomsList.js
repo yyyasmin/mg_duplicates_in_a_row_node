@@ -145,11 +145,6 @@ const RoomsList = ({ userName, roomsInitialData }) => {
     }
   };
 
-roomsInitialData.map((room, i) => {
-	console.log("IN roomsInitialData-loop: i:", i, "ROOM:", room, room.currentPlayers
-)
-})
-
   return (
     <GameContainer>
       <GameHeading titleColor={roomsInitialData[0].frameColor}>
