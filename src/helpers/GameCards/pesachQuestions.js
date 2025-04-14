@@ -18,14 +18,7 @@ export const p7_1 = require("../../assets/textures/pesachQuestions/png1/p7.png")
 export const p7_2 = require("../../assets/textures/pesachQuestions/png2/p7.png");
 export const p8_1 = require("../../assets/textures/pesachQuestions/png1/p8.png");
 export const p8_2 = require("../../assets/textures/pesachQuestions/png2/p8.png");
-export const p9_1 = require("../../assets/textures/pesachQuestions/png1/p9.png");
-export const p9_2 = require("../../assets/textures/pesachQuestions/png2/p9.png");
-export const p10_1 = require("../../assets/textures/pesachQuestions/png1/p10.png");
-export const p10_2 = require("../../assets/textures/pesachQuestions/png2/p10.png");
-export const p11_1 = require("../../assets/textures/pesachQuestions/png1/p11.png");
-export const p11_2 = require("../../assets/textures/pesachQuestions/png2/p11.png");
-export const p12_1 = require("../../assets/textures/pesachQuestions/png1/p12.png");
-export const p12_2 = require("../../assets/textures/pesachQuestions/png2/p12.png");
+
 export const pesachQuestions = [
   pesachQuestionsBg,
   [p1_1, p1_2],
@@ -35,9 +28,5 @@ export const pesachQuestions = [
   [p5_1, p5_2],
   [p6_1, p6_2],
   [p7_1, p7_2],
-  [p8_1, p8_2],
-  [p9_1, p9_2],
-  [p10_1, p10_2],
-  [p11_1, p11_2],
-  [p12_1, p12_2]
+  [p8_1, p8_2]
 ];

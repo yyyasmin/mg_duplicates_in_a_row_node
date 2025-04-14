@@ -1,0 +1,110 @@
+{
+    "gameName": "knowYourFriend",
+    "id": 1,
+    "gameCards": [
+        {
+            "id": "1",
+            "name": "p1",
+            "fileFolder": "../../assets/textures/knowYourFriend/png",
+            "fileFullPath": "../../assets/textures/knowYourFriend/png/p1.png",
+            "fileNameWithSufix": "p1.png",
+            "background": "red",
+            "text1": "בחר נושא שמעניין אותך ודבר עליו במשך 20 שניות",
+            "text2": "סכם בשלושה משפטים את מה שחברך למשחק אמר",
+            "text3": "Choose a topic that interests you and talk about for 20 seconds",
+            "text4": "Sumptiously summarized what your friend for the game said",
+            "faceType": "back"
+        },
+        {
+            "id": "2",
+            "name": "p2",
+            "fileFolder": "../../assets/textures/knowYourFriend/png",
+            "fileFullPath": "../../assets/textures/knowYourFriend/png/p2.png",
+            "fileNameWithSufix": "p2.png",
+            "background": "red",
+            "text1": "חשוב על ארוע שבו בפעלת תכונה טובה שלך ותאמר מהי התכונה מבלי לספר על הארוע",
+            "text2": "מה לדעתך היה הארוע שחברך חושב עליו?",
+            "text3": "Important about an event where you have run your good feature and say what the feature is without telling about the event",
+            "text4": "What do you think was your friend who thinks of him?",
+            "faceType": "back"
+        },
+        {
+            "id": "3",
+            "name": "p3",
+            "fileFolder": "../../assets/textures/knowYourFriend/png",
+            "fileFullPath": "../../assets/textures/knowYourFriend/png/p3.png",
+            "fileNameWithSufix": "p3.png",
+            "background": "red",
+            "text1": "ספר על חוויה מעצבנת שקרתה לך",
+            "text2": "חזור על מה שחברך למשחק סיפר, רק הפוך",
+            "text3": "A book about an annoying experience that happened to you",
+            "text4": "Repeat what your friend is told, just the opposite",
+            "faceType": "back"
+        },
+        {
+            "id": "4",
+            "name": "p4",
+            "fileFolder": "../../assets/textures/knowYourFriend/png",
+            "fileFullPath": "../../assets/textures/knowYourFriend/png/p4.png",
+            "fileNameWithSufix": "p4.png",
+            "background": "red",
+            "text1": "אמור 2 דברים שהיית רוצה לעשות עם מישהו השבוע",
+            "text2": "תבדוק עם חברך למשחק אם יש אפשרות לעשות ביחד את אחד מהדברים האלה. תקבעו זמן ומקום.",
+            "text3": "Say 2 things you would like to do with someone this week",
+            "text4": "Check with your gaming friend if you can do one of these things together.Set time and place.",
+            "faceType": "back"
+        },
+        {
+            "id": "5",
+            "name": "p5",
+            "fileFolder": "../../assets/textures/knowYourFriend/png",
+            "fileFullPath": "../../assets/textures/knowYourFriend/png/p5.png",
+            "fileNameWithSufix": "p5.png",
+            "background": "red",
+            "text1": "אמור 4 דברים שיהיו ביום המושלם שלך",
+            "text2": "בחר דבר אחד מתוך מה שחברך למשחק תאר, ותאר איך היית לוקח בזה חלק, גם אם זה לא אמיתי",
+            "text3": "Say 4 things to be on your perfect day",
+            "text4": "Choose one thing out of what your friend is for a game, and describe how you would take it smoothly, even if it's not real",
+            "faceType": "back"
+        },
+        {
+            "id": "6",
+            "name": "p6",
+            "fileFolder": "../../assets/textures/knowYourFriend/png",
+            "fileFullPath": "../../assets/textures/knowYourFriend/png/p6.png",
+            "fileNameWithSufix": "p6.png",
+            "background": "red",
+            "text1": "אם הייתי חיה - איזה חיה היית",
+            "text2": "תן 3 נימוקים למה החיה שבחר חברך מיצגת אותו",
+            "text3": "If I was an animal - what animal would you",
+            "text4": "Give 3 reasons why the animal you chose your friend represents it",
+            "faceType": "back"
+        },
+        {
+            "id": "7",
+            "name": "p7",
+            "fileFolder": "../../assets/textures/knowYourFriend/png",
+            "fileFullPath": "../../assets/textures/knowYourFriend/png/p7.png",
+            "fileNameWithSufix": "p7.png",
+            "background": "red",
+            "text1": "בחר חפץ שלדעתך יכול לייצג את האישיות שלך",
+            "text2": "איך החפץ הזה מייצג את החבר שלך - תן 3 דוגמאות",
+            "text3": "Choose an object you believe can represent your personality",
+            "text4": "How does this object represent your friend - Give 3 examples",
+            "faceType": "back"
+        },
+        {
+            "id": "8",
+            "name": "p8",
+            "fileFolder": "../../assets/textures/knowYourFriend/png",
+            "fileFullPath": "../../assets/textures/knowYourFriend/png/p8.png",
+            "fileNameWithSufix": "p8.png",
+            "background": "red",
+            "text1": "איזה תכונה אתה הכי אוהב בחברך?",
+            "text2": "תן דוגמא למצב שהשתמשת בתכונה הזו",
+            "text3": "Which feature do you like most in your friend?",
+            "text4": "Give an example of a situation you used in this feature",
+            "faceType": "back"
+        }
+    ]
+}

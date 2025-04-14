@@ -1,5 +1,5 @@
-//mport { gameName, gameNameBg } from "./GameCards/gameName.js";
-import { gameName } from "./GameCards/gameName.js";
+//mport { knowYourFriend, knowYourFriendBg } from "./GameCards/knowYourFriend.js";
+import { knowYourFriend } from "./GameCards/knowYourFriend.js";
 //import { getToKnowYourGameMate, getToKnowYourGameMateBg } from "./GameCards/getToKnowYourGameMate.js";
 import { getToKnowYourGameMate } from "./GameCards/getToKnowYourGameMate.js";
 //import { pesachQuestions, pesachQuestionsBg } from "./GameCards/pesachQuestions.js";
@@ -117,6 +117,7 @@ export const calculateCardSize = (cardsNum) => {
 const initCardsInRoom = async (room, importPaths, backgroundImages) => {
   const backgroundImage = backgroundImages[room.gameName] || null;
   const jsonURL = `${CHOSEN_PROXY_URL}/database/GameCards/${room.gameName}.json`;
+  console.log("jsonURL: ", jsonURL)
   const cardsData = await fetchDataFromJSON(jsonURL);
 
   if (!cardsData || !Array.isArray(cardsData.gameCards) || cardsData.gameCards.length === 0) {
@@ -156,13 +157,13 @@ const initCardsInRoom = async (room, importPaths, backgroundImages) => {
 
 const initCardsInRoomsFromJson = async (rooms) => {
   const importPaths = {
-    gameName: gameName.slice(1),
+    knowYourFriend: knowYourFriend.slice(1),
     getToKnowYourGameMate: getToKnowYourGameMate.slice(1),
     pesachQuestions: pesachQuestions.slice(1),
   };
 
   const backgroundImages = {
-    gameName: gameName[0],
+    knowYourFriend: knowYourFriend[0],
     getToKnowYourGameMate: getToKnowYourGameMate[0],
     pesachQuestions: pesachQuestions[0],
   };

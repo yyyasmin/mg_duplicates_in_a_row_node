@@ -1,6 +1,6 @@
 {
     "gameName": "pesachQuestions",
-    "id": 3,
+    "id": 1,
     "gameCards": [
         {
             "id": "1",
@@ -9,10 +9,10 @@
             "fileFullPath": "../../assets/textures/pesachQuestions/png/p1.png",
             "fileNameWithSufix": "p1.png",
             "background": "red",
-            "text1": "בחר נושא שמעניין אותך ודבר עליו במשך 20 שניות",
-            "text2": "סכם בשלושה משפטים את מה שחברך למשחק אמר",
-            "text3": "Choose a topic that interests you and talk about it for 20 seconds",
-            "text4": "Summarize in three sentences what your playmate said",
+            "text1": "מה נשתנה הלילה הזה",
+            "text2": "איזה שינוי היית רוצה לעשות השנה?",
+            "text3": "What's changed this night",
+            "text4": "What change would you like to do this year?",
             "faceType": "back"
         },
         {
@@ -22,10 +22,10 @@
             "fileFullPath": "../../assets/textures/pesachQuestions/png/p2.png",
             "fileNameWithSufix": "p2.png",
             "background": "red",
-            "text1": "ספר על אירוע שבו הפעלת תכונת אופי טוב שלך מבלי להגיד מה התכונה",
-            "text2": "מה לדעתך התכונה שחברך למשחק הפעיל",
-            "text3": "Tell about an occasion when you used a good character trait of yours without saying what the trait was",
-            "text4": "What do you think was the character trait that your game mate used?",
+            "text1": "דומם שטה תיבה קטנה",
+            "text2": "מה עוזר לך להחזיק את הראש מעל המים?",
+            "text3": "Still silent a little box",
+            "text4": "What helps you hold your head over the water?",
             "faceType": "back"
         },
         {
@@ -35,10 +35,10 @@
             "fileFullPath": "../../assets/textures/pesachQuestions/png/p3.png",
             "fileNameWithSufix": "p3.png",
             "background": "red",
-            "text1": "ספר על חוויה מעצבנת שקרתה לך",
-            "text2": "חזור על מה שחברך למשחק סיפר, רק הפוך",
-            "text3": "Tell about an annoying experience that happened to you",
-            "text4": "Repeat what your game mate told but backwards",
+            "text1": "חמץ ומצה",
+            "text2": "מה החמצת השנה?",
+            "text3": "Chametz and matzah",
+            "text4": "What did you miss this year?",
             "faceType": "back"
         },
         {
@@ -48,10 +48,10 @@
             "fileFullPath": "../../assets/textures/pesachQuestions/png/p4.png",
             "fileNameWithSufix": "p4.png",
             "background": "red",
-            "text1": "אמור 2 דברים שהיית רוצה לעשות עם מישהו השבוע",
-            "text2": "תבדוק עם חברך למשחק אם יש אפשרות לעשות ביחד את אחד מהדברים האלה. תקבעו זמן ומקום.",
-            "text3": "Name 2 things you would like to do with someone this week",
-            "text4": "Choose 1 thing from what your playmate said and set a time and place to do them within the next week",
+            "text1": "4 כוסות",
+            "text2": "על מה תרצה להרים כוס 'לחיים'?",
+            "text3": "4 cups",
+            "text4": "What would you like to pick up a \"life\" cup?",
             "faceType": "back"
         },
         {
@@ -61,10 +61,10 @@
             "fileFullPath": "../../assets/textures/pesachQuestions/png/p5.png",
             "fileNameWithSufix": "p5.png",
             "background": "red",
-            "text1": "אמור 4 דברים שיהיו ביום המושלם שלך",
-            "text2": "בחר דבר אחד מתוך מה שחברך למשחק תאר, ותאר איך היית לוקח בזה חלק, גם אם זה לא אמיתי",
-            "text3": "Name 4 things that would make your perfect day",
-            "text4": "Choose one thing from what your playmate described, and describe how you would take part in it, even if it's not real",
+            "text1": "כי ישאלך",
+            "text2": "איזו שאלה היית רוצה לשאול את עצמך?",
+            "text3": "That will be asked",
+            "text4": "Which question would you like to ask yourself?",
             "faceType": "back"
         },
         {
@@ -74,10 +74,10 @@
             "fileFullPath": "../../assets/textures/pesachQuestions/png/p6.png",
             "fileNameWithSufix": "p6.png",
             "background": "red",
-            "text1": "אם היית חיה, איזה חיה היית? איך החיה הזו מייצגת אותך?",
-            "text2": "איזה עוד תכונות יש לחיה הזו שהיו יכולות לייצג מישהו?",
-            "text3": "If you were an animal, what animal would you be? How does this animal represent you?",
-            "text4": "What other characteristics does this animal have that could represent someone?",
+            "text1": "קריעת ים סוף",
+            "text2": "מהו האתגר שעשוי לקדם אותך?",
+            "text3": "Tearing the Red Sea",
+            "text4": "What is the challenge that may promote you?",
             "faceType": "back"
         },
         {
@@ -87,10 +87,10 @@
             "fileFullPath": "../../assets/textures/pesachQuestions/png/p7.png",
             "fileNameWithSufix": "p7.png",
             "background": "red",
-            "text1": "בחר חפץ שלדעתך יכול לייצג את האישיות שלך",
-            "text2": "איזה תכונות לדעתך החפץ הזה יכול לייצג?",
-            "text3": "Choose an object that you think can represent your personality",
-            "text4": "What qualities do you think this object could represent?",
+            "text1": "בן חורין",
+            "text2": "במה מתבטא בן החורין שבך?",
+            "text3": "free man",
+            "text4": "What is the guy's son?",
             "faceType": "back"
         },
         {
@@ -100,10 +100,10 @@
             "fileFullPath": "../../assets/textures/pesachQuestions/png/p8.png",
             "fileNameWithSufix": "p8.png",
             "background": "red",
-            "text1": "מה היית אם לא היית מה שאתה היום?",
-            "text2": "מה משותף למה שחברך למשחק היום ולמה שהוא היה אם הוא לא היה מה שהוא היום?",
-            "text3": "What would you be if you weren't what you are today?",
-            "text4": "What is common between what your game mate is today and what he would be if he wasn't what he is today?",
+            "text1": "עבדים היינו",
+            "text2": "למה אתה משועבד?",
+            "text3": "We were slaves",
+            "text4": "Why are you enslaved?",
             "faceType": "back"
         }
     ]
