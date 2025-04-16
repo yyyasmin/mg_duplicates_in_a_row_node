@@ -1,8 +1,8 @@
 import io from "socket.io-client";
-import { CHOSEN_PROXY_URL } from "./helpers/ServerRoutes.js";
+import { CHOSEN_NODE_URL } from "./helpers/ServerRoutes.js";
 import isEmpty from "./helpers/isEmpty.js";
 
-export const socket = io(CHOSEN_PROXY_URL);
+export const socket = io(CHOSEN_NODE_URL);
 
 export const emitAddMemberToRoom = ( {chosenRoom, playerName} ) => {
   console.log("IN emitAddMemberToRoom -- input OBJ --chosenRoom: ", chosenRoom)

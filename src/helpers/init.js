@@ -4,7 +4,7 @@ import { knowYourFriend } from "./GameCards/knowYourFriend.js";
 import { getToKnowYourGameMate } from "./GameCards/getToKnowYourGameMate.js";
 //import { pesachQuestions, pesachQuestionsBg } from "./GameCards/pesachQuestions.js";
 import { pesachQuestions } from "./GameCards/pesachQuestions.js";
-import { CHOSEN_PROXY_URL } from "./ServerRoutes.js";
+import { CHOSEN_NODE_URL } from "./ServerRoutes.js";
 import { pickRandom8cards, shuffle } from "./shuffle";
 //import isEmpty from "./isEmpty";
 
@@ -18,7 +18,7 @@ async function fetchActiveRooms(rooms) {
   });
 
   try {
-    const server_url = `${CHOSEN_PROXY_URL}/api/activeRooms`;
+    const server_url = `${CHOSEN_NODE_URL}/api/activeRooms`;
     const response = await fetch(server_url, {
       method: 'POST',
       headers: {
@@ -116,7 +116,7 @@ export const calculateCardSize = (cardsNum) => {
 
 const initCardsInRoom = async (room, importPaths, backgroundImages) => {
   const backgroundImage = backgroundImages[room.gameName] || null;
-  const jsonURL = `${CHOSEN_PROXY_URL}/database/GameCards/${room.gameName}.json`;
+  const jsonURL = `${CHOSEN_NODE_URL}/database/GameCards/${room.gameName}.json`;
   console.log("jsonURL: ", jsonURL)
   const cardsData = await fetchDataFromJSON(jsonURL);
 
@@ -183,7 +183,7 @@ const initCardsInRoomsFromJson = async (rooms) => {
 
 
 const initRoomsFromJson = async () => {
-  const jsonURL = `${CHOSEN_PROXY_URL}/database/rooms.json`;
+  const jsonURL = `${CHOSEN_NODE_URL}/database/rooms.json`;
   const roomsData = await fetchDataFromJSON(jsonURL);
   if (roomsData) {
     let newRooms = [];
@@ -193,7 +193,7 @@ const initRoomsFromJson = async () => {
         newRooms.push({
           ...room,
           id: `${room.id}-${i}`,
-          roomURL: `${CHOSEN_PROXY_URL}/room/${room.id}-${i}`,
+          roomURL: `${CHOSEN_NODE_URL}/room/${room.id}-${i}`,
           cardsData: [],
         });
       }
