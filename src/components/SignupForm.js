@@ -87,7 +87,7 @@ function SignupForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          superUserCode,
+          //superUserCode,
           email,
           username,
           password,
