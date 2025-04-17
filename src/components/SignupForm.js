@@ -56,7 +56,7 @@ const SuccessMsg = styled.p`
 function SignupForm() {
   console.log("FORM RENDERED");
 
-  const [superUserCode, setSuperUserCode] = useState("");
+  //const [superUserCode, setSuperUserCode] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
