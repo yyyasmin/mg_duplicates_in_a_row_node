@@ -72,10 +72,10 @@ function SignupForm() {
     setError("");
     setSuccess(false);
 
-    if (!superUserCode.trim()) {
-      setError("Superuser code is required.");
-      return;
-    }
+    // if (!superUserCode.trim()) {
+    //   setError("Superuser code is required.");
+    //   return;
+    // }
 
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
@@ -114,13 +114,14 @@ function SignupForm() {
     <FormContainer>
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
-        <InputLabel htmlFor="superuser">Superuser Code:</InputLabel>
+
+        {/* <InputLabel htmlFor="superuser">Superuser Code:</InputLabel>
         <TextInput
           id="superuser"
           type="text"
           value={superUserCode}
           onChange={(e) => setSuperUserCode(e.target.value)}
-        />
+        /> */}
 
         <InputLabel htmlFor="email">Email:</InputLabel>
         <TextInput
@@ -158,6 +159,7 @@ function SignupForm() {
         {success && <SuccessMsg>Signup successful! Redirecting...</SuccessMsg>}
 
         <SubmitButton type="submit">Signup</SubmitButton>
+        
       </form>
     </FormContainer>
   );
