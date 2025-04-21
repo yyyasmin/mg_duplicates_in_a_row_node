@@ -1,0 +1,110 @@
+{
+  "gameName": "pesachQuestions_2",
+  "id": 2,
+  "gameCards": [
+    {
+      "id": "1",
+      "name": "p1",
+      "fileFolder": "../../assets/textures/pesachQuestions_2/png",
+      "fileFullPath": "../../assets/textures/pesachQuestions_2/png/p1.png",
+      "fileNameWithSufix": "p1.png",
+      "background": "red",
+      "text1": "הלל",
+      "text2": "למי אתה רוצה להודות?",
+      "text3": "ENGLISH: הלל",
+      "text4": "ENGLISH: למי אתה רוצה להודות?",
+      "faceType": "back"
+    },
+    {
+      "id": "2",
+      "name": "p2",
+      "fileFolder": "../../assets/textures/pesachQuestions_2/png",
+      "fileFullPath": "../../assets/textures/pesachQuestions_2/png/p2.png",
+      "fileNameWithSufix": "p2.png",
+      "background": "red",
+      "text1": "בצאת ישראל ממצרים",
+      "text2": "מהי המצרים שלך?",
+      "text3": "ENGLISH: בצאת ישראל ממצרים",
+      "text4": "ENGLISH: מהי המצרים שלך?",
+      "faceType": "back"
+    },
+    {
+      "id": "3",
+      "name": "p3",
+      "fileFolder": "../../assets/textures/pesachQuestions_2/png",
+      "fileFullPath": "../../assets/textures/pesachQuestions_2/png/p3.png",
+      "fileNameWithSufix": "p3.png",
+      "background": "red",
+      "text1": "אש ותמרות עשן",
+      "text2": "מה מצית אש בחייך?",
+      "text3": "ENGLISH: אש ותמרות עשן",
+      "text4": "ENGLISH: מה מצית אש בחייך?",
+      "faceType": "back"
+    },
+    {
+      "id": "4",
+      "name": "p4",
+      "fileFolder": "../../assets/textures/pesachQuestions_2/png",
+      "fileFullPath": "../../assets/textures/pesachQuestions_2/png/p4.png",
+      "fileNameWithSufix": "p4.png",
+      "background": "red",
+      "text1": "מלאו כיסי באגוזים",
+      "text2": "איזה אגוז היה קשה לפיצוח השנה?",
+      "text3": "ENGLISH: מלאו כיסי באגוזים",
+      "text4": "ENGLISH: איזה אגוז היה קשה לפיצוח השנה?",
+      "faceType": "back"
+    },
+    {
+      "id": "5",
+      "name": "p5",
+      "fileFolder": "../../assets/textures/pesachQuestions_2/png",
+      "fileFullPath": "../../assets/textures/pesachQuestions_2/png/p5.png",
+      "fileNameWithSufix": "p5.png",
+      "background": "red",
+      "text1": "אפיקומן",
+      "text2": "למי היית רוצה לתת מתנה?",
+      "text3": "ENGLISH: אפיקומן",
+      "text4": "ENGLISH: למי היית רוצה לתת מתנה?",
+      "faceType": "back"
+    },
+    {
+      "id": "6",
+      "name": "p6",
+      "fileFolder": "../../assets/textures/pesachQuestions_2/png",
+      "fileFullPath": "../../assets/textures/pesachQuestions_2/png/p6.png",
+      "fileNameWithSufix": "p6.png",
+      "background": "red",
+      "text1": "ארבעת הבנים",
+      "text2": "איזה בן היית מוסיף להם?",
+      "text3": "ENGLISH: ארבעת הבנים",
+      "text4": "ENGLISH: איזה בן היית מוסיף להם?",
+      "faceType": "back"
+    },
+    {
+      "id": "7",
+      "name": "p7",
+      "fileFolder": "../../assets/textures/pesachQuestions_2/png",
+      "fileFullPath": "../../assets/textures/pesachQuestions_2/png/p7.png",
+      "fileNameWithSufix": "p7.png",
+      "background": "red",
+      "text1": "והגדת לבנך",
+      "text2": "מה למדת מהוריך?",
+      "text3": "ENGLISH: והגדת לבנך",
+      "text4": "ENGLISH: מה למדת מהוריך?",
+      "faceType": "back"
+    },
+    {
+      "id": "8",
+      "name": "p8",
+      "fileFolder": "../../assets/textures/pesachQuestions_2/png",
+      "fileFullPath": "../../assets/textures/pesachQuestions_2/png/p8.png",
+      "fileNameWithSufix": "p8.png",
+      "background": "red",
+      "text1": "ונצעק אל ה'",
+      "text2": "על מה היית רוצה להתפלל הלילה?",
+      "text3": "ENGLISH: ונצעק אל ה'",
+      "text4": "ENGLISH: על מה היית רוצה להתפלל הלילה?",
+      "faceType": "back"
+    }
+  ]
+}

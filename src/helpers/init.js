@@ -8,7 +8,7 @@ import { CHOSEN_NODE_URL } from "./ServerRoutes.js";
 import { pickRandom8cards, shuffle } from "./shuffle";
 //import isEmpty from "./isEmpty";
 
-const ROOMS_PER_GAME = 8;
+export const ROOMS_PER_GAME = 7;
 
 async function fetchActiveRooms(rooms) {
   const roomPlayersData = rooms.flat().map((room) => {
@@ -32,7 +32,7 @@ async function fetchActiveRooms(rooms) {
     }
 
     const data = await response.json();
-
+	
     const roomFullData = rooms.map((roomArray) => {
       return roomArray.map((room) => {
         const matchingRoomData = data.find((roomData) => roomData.id === room.id);	  
@@ -187,9 +187,8 @@ const initRoomsFromJson = async () => {
   const roomsData = await fetchDataFromJSON(jsonURL);
   if (roomsData) {
     let newRooms = [];
-
     roomsData.forEach((room) => {
-      for (let i = 1; i <= ROOMS_PER_GAME; i++) {
+      for (let i = 0; i < ROOMS_PER_GAME; i++) {
         newRooms.push({
           ...room,
           id: `${room.id}-${i}`,
@@ -212,7 +211,7 @@ export const initRoomsFunc = async () => {
   const updatedRooms = allRooms.map(roomArray => {
     const updatedRoomArray = roomArray.map(room => {
       const activeRoom = flatActiveRooms.find(activeRoom => activeRoom.id === room.id);
-      console.log("FOUND MATCHING ROOM ID:", room.id, activeRoom, activeRoom?.currentPlayers || []);
+      //console.log("FOUND MATCHING ROOM ID:", room.id, activeRoom, activeRoom?.currentPlayers || []);
       return {
         ...room,
         currentPlayers: activeRoom?.currentPlayers || [],

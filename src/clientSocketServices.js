@@ -5,14 +5,7 @@ import isEmpty from "./helpers/isEmpty.js";
 export const socket = io(CHOSEN_NODE_URL);
 
 export const emitAddMemberToRoom = ( {chosenRoom, playerName} ) => {
-  console.log("IN emitAddMemberToRoom -- input OBJ --chosenRoom: ", chosenRoom)
-  console.log("IN emitAddMemberToRoom -- input OBJ --playerName: ", playerName)
-
-  if ( !isEmpty(chosenRoom) && !isEmpty(playerName) ) {
-    
-	console.log("IN emitAddMemberToRoom chosenRoom.roomURL", chosenRoom.roomURL)
-    console.log("IN emitAddMemberToRoom playerName", playerName)
-    
+  if ( !isEmpty(chosenRoom) && !isEmpty(playerName) ) {       
 	socket.emit( 'CREATE_ROOM_AND_ADD_PLAYER', { chosenRoom, playerName } );
   }
   else {
@@ -60,6 +53,21 @@ export const updateCr = (setCr) => {
     setCr(serverUpdatedCurentRoom);
   });
 };
+// Listens to UPDATED_DUMMY_ROOM — should be named updateDummyRoom
+export const updateDummyRoom = (setDummyRoom) => {
+  socket.on("UPDATED_DUMMY_ROOM", (serverUpdatedDummyRoom) => {
+    console.log("clientSocketServices -- updateDummyRoom -- ON UPDATED_DUMMY_ROOM -- serverUpdatedDummyRoom: ", serverUpdatedDummyRoom);           
+    setDummyRoom(serverUpdatedDummyRoom);
+  });
+};
+
+export const otherPlayerJoinedRoom = (setJoinedByOtherPlayerRoom) => {
+  socket.on("NEW_PLAYER_JOINED_REAL_ROOM", (changedRoom) => {
+    console.log("clientSocketServices -- otherPlayerJoinedRoom -- ON NEW_PLAYER_JOINED_REAL_ROOM -- changedRoom: ", changedRoom);           
+    setJoinedByOtherPlayerRoom(changedRoom);
+  });
+};
+
 
 export const updatePlayerLeft = (setPlayerLeft) => {
   socket.on("PLAYER_LEFT_ROOM", (playerName) => {
@@ -97,6 +105,11 @@ export const updateCardSize = (setCardSize) => {
 export const removeUpdatedRoomDataListener = () => {
   ////console.log("removeUpdatedRoomDataListener -- REMOVING SOCKER from UPDATED_CURRENT_ROOM")
   socket.off("UPDATED_CURRENT_ROOM");
+};
+
+export const removeUpdatedChangedRoomListener = () => {
+  console.log("removeUpdatedChangedRoomListener -- REMOVING SOCKER from NEW_PLAYER_JOINED_REAL_ROOM")
+  socket.off("NEW_PLAYER_JOINED_REAL_ROOM");
 };
 
 export const removeUpdatedMatchedCards = () => {

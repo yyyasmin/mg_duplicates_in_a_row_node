@@ -11,9 +11,42 @@ function setActiveRooms(newData) {
   return activeRooms;
 }
 
+const emitMsgToRoomConnectedBeforeJoin = (io, msgType, updatedRoom) => {
+  updatedRoom.currentPlayers.forEach((player) => {
+    console.log("EMITTING TO PLAYER", player.name, "msgType:", msgType);
+    io.to(player.socketId).emit(msgType, updatedRoom);
+  });
+};
+
+const notifyConnectedBeforeJoin = (io, playerName, joinedRoom) => {
+  const dummyRoomId = joinedRoom.id.slice(0, -1) + "0";
+  const dummyRoom = getRoomFromActiveRoomsById(dummyRoomId);
+
+  if (dummyRoom === -1) return;
+  
+  console.log("IN notifyConnectedBeforeJoin -- dummyRoom: ",dummyRoom )
+  console.log("IN activeRooms -- dummyRoom: ",activeRooms )
+
+  dummyRoom.currentPlayers.forEach((player) => {
+    const socketId = player.socketId;
+
+    const isInRealRoom = activeRooms.some((room) => 
+      !room.id.endsWith("0") && // Check if it's a real room
+      room.currentPlayers.some((p) => p.socketId === socketId) // Check if the player is in that room
+    );
+
+    if (!isInRealRoom) {
+      io.to(socketId).emit("NEW_PLAYER_JOINED_REAL_ROOM", {
+        joinedRoomId: joinedRoom.id,
+        joinedPlayerName: playerName,
+      });
+    }
+  });
+};
+
+
 const emitMsgToRoomPlayers = (io, msgType, updatedRoom) => {
   updatedRoom.currentPlayers.forEach((player) => {
-	//pppRoom("EMITING TO PLAYER "+player.name + " " + msgType, updatedRoom)
     io.to(player.socketId).emit(msgType, updatedRoom);
   });
 };
@@ -57,8 +90,6 @@ const getRoomIdxFromActiveRoomsByID = (roomID) => {
 }
 
 const updateActiveRoomsWithUpdatedRoom = (roomWithNewData) => {
-  //pppRoom('222 - roomWithNewData', roomWithNewData)
-
   if (isEmpty(roomWithNewData)) {
     return -1
   }
@@ -69,10 +100,7 @@ const updateActiveRoomsWithUpdatedRoom = (roomWithNewData) => {
     return -1
   }  
   let roomToUpdate = activeRooms[updatingIdx]
-  //pppRoom("roomToUpdate:", roomToUpdate)
   activeRooms[updatingIdx] = {...roomWithNewData};
-  //pppRoom("\n\nactiveRooms-updatingIdx:", activeRooms[updatingIdx])
-
   return activeRooms[updatingIdx]
 }
 
@@ -106,8 +134,6 @@ const setAvailableRoomInActiveRooms = (requesedRoom) => {
 }
 
 
-
-// Function to move player to the end
 const movePlayerToEnd = (currentPlayers, playerName) => {
   const playerIndex = currentPlayers.findIndex((player) => player.name === playerName);
   if (playerIndex !== -1) {
@@ -134,20 +160,14 @@ const addPlayerToRoom = (roomToAddPlayer, playerName, socketId) => {
       isActive: false,
       flippCount: 0,
     };
-	//pppRooms("IN addPlayerToRoom -- activeRooms: ", activeRooms, 2) 
     let availableRoomIdx = getRoomIdxFromActiveRoomsByRoomURL(roomToAddPlayer.roomURL)
     let availableRoom = activeRooms[availableRoomIdx]
 	if (isEmpty(availableRoom))  {
-	  //////console.log("NO availableRoom found -- activeRooms:", activeRooms)		
 	}
     let currentPlayersNewCopy = [...availableRoom.currentPlayers]
     currentPlayersNewCopy.push(newPlayer)
 
-    //////console.log("NEW PLAYERS WIH ADDITION PLAYER:", playerName, "IS: ", currentPlayersNewCopy)
-    //////console.log()
-
     roomToAddPlayerNewCopy = { ...availableRoom, currentPlayers:currentPlayersNewCopy };
-	//pppRoom('\n\n\nroomToAddPlayerNewCopy:', roomToAddPlayerNewCopy)
     if (roomToAddPlayerNewCopy.currentPlayers.length === roomToAddPlayerNewCopy.maxMembers) {
       roomToAddPlayerNewCopy.currentPlayers.forEach((player) => {
         player.isActive = false;
@@ -155,7 +175,6 @@ const addPlayerToRoom = (roomToAddPlayer, playerName, socketId) => {
       roomToAddPlayerNewCopy.currentPlayers[0].isActive = true;
       roomToAddPlayerNewCopy.startGame = true;
     }
-	//pppRoom("\n111 - roomToAddPlayerNewCopy:", roomToAddPlayerNewCopy)
     return updateActiveRoomsWithUpdatedRoom(roomToAddPlayerNewCopy);
  }
 
@@ -164,13 +183,8 @@ const removeRoomFromActiveRooms = (roomId) => {
   const roomIndex = activeRooms.findIndex((r) => r.id === roomId);
   if (roomIndex !== -1) {
     activeRooms.splice(roomIndex, 1);
-	  //////////console.log("REQUESTED ROOM:",roomId, " HAS REMOVED FRM activeRooms")
-	  //////////console.log("")
-
   }
   else {
-	  //////////console.log("REQUESTED ROOM:",roomId, " IS MISSIF GROM activeRooms")
-	  //////////console.log("")
 	  return -1
   }
 };
@@ -190,55 +204,51 @@ function checkInactivePlayers(io) {
   const currentTime = Date.now();
   for (const playerName in playerLastActive) {
     if (currentTime - playerLastActive[playerName] > INACTIVE_TIMEOUT) {
-      ////////////console.log(`${playerName} has been inactive and will be removed.`);
       delete playerLastActive[playerName];
       io.emit("PLAYER_LEFT_ROOM", playerName);
     }
   }
 }
 
-// Start a timer to check for inactive players periodically
 setInterval(() => {
   checkInactivePlayers();
 }, HEART_BEAT_INTERVAL);
 
-// Socket.io event handling
 const serverSocketServices = (io) => {
 	
   io.on("connection", (socket) => {
 	  
-    // Listen for HEART_BEAT signal from client
     socket.on("HEART_BEAT", (playerName) => {
       handleHeartBeat(playerName);
     });
 
-    socket.on("CREATE_ROOM_AND_ADD_PLAYER", ( {chosenRoom, playerName} ) => {
-		
-////console.log("IN CREATE_ROOM_AND_ADD_PLAYER --  chosenRoom.id:", chosenRoom.id);
-////console.log("IN CREATE_ROOM_AND_ADD_PLAYER -- chosenRoom.roomURL:", chosenRoom.roomURL);
+	
+socket.on("CREATE_ROOM_AND_ADD_PLAYER", ({ chosenRoom, playerName }) => {
+  let updatedRoom = { ...setAvailableRoomInActiveRooms(chosenRoom) };
 
-            
-      let updatedRoom = { ...setAvailableRoomInActiveRooms(chosenRoom) };
-    
-	//////console.log("IN CREATE_ROOM_AND_ADD_PLAYER updatedRoom.id", updatedRoom.id)
-    //////console.log("IN CREATE_ROOM_AND_ADD_PLAYER playerName", playerName)
-   
-      if (updatedRoom === -1)  {
-        //////console.log("CAN NOT SET AVAILABLE ROOM FOR REQUESTED ROOOM NUM:", chosenRoom.roomURL, " AND PLAYER:", playerName)
+  if (updatedRoom === -1) {
+    return;
+  }
 
-      }  else {
-        updatedRoom = { ...addPlayerToRoom(updatedRoom, playerName, socket.id) } ;
-      }
+  updatedRoom = {
+    ...addPlayerToRoom(updatedRoom, playerName, socket.id),
+  };
 
-      emitMsgToRoomPlayers(io, "UPDATED_CURRENT_ROOM", updatedRoom);
-    })
+  console.log("CREATE_ROOM_AND_ADD_PLAYER -- chosenRoom-id-2", chosenRoom.id[2]);
+
+  if (chosenRoom.id[2] === '0') {
+    emitMsgToRoomConnectedBeforeJoin(io, "UPDATED_DUMY_ROOM", updatedRoom);
+  } else {
+    emitMsgToRoomPlayers(io, "UPDATED_CURRENT_ROOM", updatedRoom);
+
+    // 👇 Notify dummy room users about the new player in a real room
+    notifyConnectedBeforeJoin(io, playerName, chosenRoom);
+  }
+});
 
 
     socket.on("REMOVE_PLAYER_FROM_ROOM", ( {requestedRoom, playerName} ) => {
       if ( isEmpty(requestedRoom) )  {
-	    //////console.log("\n============================")
-		//////console.log("requestedRoom: ", requestedRoom)
-        //////console.log("IN REMOVE_PLAYER_FROM_ROOM -- REQUESTED ROOM IS EMPTY -- playerName, requestedRoom:", playerName)
         return -1
       }
       let existingRoom, updatedRoom;
@@ -283,18 +293,11 @@ const serverSocketServices = (io) => {
     });
 
     socket.on("CURENT_ROOM_CHANGED", (updatedRoom) => {
-      //pppRoom("\n333 - CURENT_ROOM_CHANGED -- updatedRoom:", updatedRoom)
 	  updateActiveRoomsWithUpdatedRoom(updatedRoom);
       emitMsgToRoomPlayers(io, "UPDATED_CURRENT_ROOM", updatedRoom);
     });
 
-    // socket.on("MATCHED_CARDS_CHANGED", (updatedRoom, matchedCards) => {
-    //   emitMsgToRoomPlayers2(io, "UPDATED_MATCHED_CARDS", updatedRoom, matchedCards);
-    // });
-
     socket.on("IS_MATCHED_CHANGED", (cr, isMatched, last2FlippedCards, have_has_word_idx) => {
-      //////////console.log("IN ON-IS_MATCHED_CHANGED -- cr:", cr)
-      //////////console.log("IN ON-IS_MATCHED_CHANGED -- last2FlippedCards:", last2FlippedCards)
       emitMsgToRoomPlayers3(io, "UPDATED_IS_MATCHED", cr, isMatched, last2FlippedCards);
     });
     socket.on("START_GAME", (cr) => {
