@@ -7,10 +7,13 @@ import { ROOMS_PER_GAME } from "../helpers/init";
 import {
   updateCr,
   updateDummyRoom,
+  removeUpdatedDummyRoomListener,
   removeUpdatedRoomDataListener,
+  removeUpdatedChangedRoomListener,
+  emitConnectedAndGetDummyRoom,
   emitAddMemberToRoom,
   otherPlayerJoinedRoom,
-  removeUpdatedChangedRoomListener
+  
 } from "../clientSocketServices";
 
 const GameContainer = styled.div`
@@ -133,20 +136,21 @@ const RoomsList = ({ userName, roomsInitialData }) => {
   const navigate = useNavigate();
   
 
-  console.log("IN RoomsList -- roomsInitialData", roomsInitialData);
+  console.log("IN start of RoomsList -- roomsInitialData", roomsInitialData);
+  console.log("IN start of RoomsList -- dummyRoom", dummyRoom);
 
   useEffect(() => {
-    const handleUpdateCr = (room) => setCr(room);
-    updateCr(handleUpdateCr);
+    //const handleUpdateCr = (room) => setCr(room);
+    //updateCr(handleUpdateCr);
+    updateCr(setCr);
+    updateDummyRoom(setDummyRoom);
 
-    const handleUpdateDummyRoom = (room) => setDummyRoom(room);
-    updateDummyRoom(handleUpdateDummyRoom);
 
     const getDummyRoom = async () => {
       console.log("IN getDummyRoom -- dummyRoom: ", dummyRoom);
       if (!isEmpty(dummyRoom) && !isEmpty(userName)) {
-        await emitAddMemberToRoom({
-          chosenRoom: dummyRoom,
+        await emitConnectedAndGetDummyRoom({
+          dummyRoom: dummyRoom,
           playerName: userName,
         });
       }
@@ -161,7 +165,6 @@ const RoomsList = ({ userName, roomsInitialData }) => {
   //DEBUG  
   useEffect(() => {
     console.log("IN DEBUG useEffect -- dummyRoom: ", dummyRoom);
-    console.log("IN DEBUG useEffect -- currentRoom: ", currentRoom);
   }, [dummyRoom]);
 
   // When the room changes, navigate to the new room

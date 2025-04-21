@@ -4,6 +4,15 @@ import isEmpty from "./helpers/isEmpty.js";
 
 export const socket = io(CHOSEN_NODE_URL);
 
+export const emitConnectedAndGetDummyRoom = ( {dummyRoom, playerName} ) => {
+  if ( !isEmpty(dummyRoom) && !isEmpty(playerName) ) {       
+	socket.emit( 'ASIGN_DUMMY_ROOM', { dummyRoom, playerName } );
+  }
+  else {
+    console.log("tyryig to emit ASIGN_DUMMY_ROOM-- dummyRoom:", dummyRoom, " PLAYER:", playerName) 
+  }
+};
+
 export const emitAddMemberToRoom = ( {chosenRoom, playerName} ) => {
   if ( !isEmpty(chosenRoom) && !isEmpty(playerName) ) {       
 	socket.emit( 'CREATE_ROOM_AND_ADD_PLAYER', { chosenRoom, playerName } );
@@ -53,7 +62,7 @@ export const updateCr = (setCr) => {
     setCr(serverUpdatedCurentRoom);
   });
 };
-// Listens to UPDATED_DUMMY_ROOM — should be named updateDummyRoom
+
 export const updateDummyRoom = (setDummyRoom) => {
   socket.on("UPDATED_DUMMY_ROOM", (serverUpdatedDummyRoom) => {
     console.log("clientSocketServices -- updateDummyRoom -- ON UPDATED_DUMMY_ROOM -- serverUpdatedDummyRoom: ", serverUpdatedDummyRoom);           
@@ -100,6 +109,11 @@ export const updateCardSize = (setCardSize) => {
     ////console.log("IN updateCardSize -- ON-UPDATED_CARD_SIZE -- cardSize: ", cardSize)
     setCardSize(cardSize);
   });
+};
+
+export const removeUpdatedDummyRoomListener = () => {
+  ////console.log("removeUpdatedDummyRoomListener -- REMOVING SOCKER from UPDATED_CURRENT_ROOM")
+  socket.off("UPDATED_CURRENT_ROOM");
 };
 
 export const removeUpdatedRoomDataListener = () => {

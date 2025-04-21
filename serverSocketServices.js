@@ -14,6 +14,10 @@ function setActiveRooms(newData) {
 const emitMsgToRoomConnectedBeforeJoin = (io, msgType, updatedRoom) => {
   updatedRoom.currentPlayers.forEach((player) => {
     console.log("EMITTING TO PLAYER", player.name, "msgType:", msgType);
+	console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+	console.log("DUMMYROOM: ", updatedRoom)
+	console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+
     io.to(player.socketId).emit(msgType, updatedRoom);
   });
 };
@@ -223,28 +227,37 @@ const serverSocketServices = (io) => {
     });
 
 	
-socket.on("CREATE_ROOM_AND_ADD_PLAYER", ({ chosenRoom, playerName }) => {
-  let updatedRoom = { ...setAvailableRoomInActiveRooms(chosenRoom) };
+ socket.on("ASIGN_DUMMY_ROOM", ({ dummyRoom, playerName }) => {
+	 let updatedRoom = { ...setAvailableRoomInActiveRooms(dummyRoom) };
 
-  if (updatedRoom === -1) {
+	 if (updatedRoom === -1) {
+      return;
+	 }
+
+	 updatedRoom = {
+      ...addPlayerToRoom(updatedRoom, playerName, socket.id),
+	 };
+
+console.log("ASIGN_DUMMY_ROOM -- dummyRoom:", dummyRoom);
+
+	 emitMsgToRoomConnectedBeforeJoin(io, "ASIGN_DUMMY_ROOM", updatedRoom);
+
+ });
+
+	
+ socket.on("CREATE_ROOM_AND_ADD_PLAYER", ({ chosenRoom, playerName }) => {
+   let updatedRoom = { ...setAvailableRoomInActiveRooms(chosenRoom) };
+   if (updatedRoom === -1) {
     return;
-  }
-
-  updatedRoom = {
+   }
+   updatedRoom = {
     ...addPlayerToRoom(updatedRoom, playerName, socket.id),
-  };
+   };
 
-  console.log("CREATE_ROOM_AND_ADD_PLAYER -- chosenRoom-id-2", chosenRoom.id[2]);
-
-  if (chosenRoom.id[2] === '0') {
-    emitMsgToRoomConnectedBeforeJoin(io, "UPDATED_DUMY_ROOM", updatedRoom);
-  } else {
-    emitMsgToRoomPlayers(io, "UPDATED_CURRENT_ROOM", updatedRoom);
-
-    // 👇 Notify dummy room users about the new player in a real room
-    notifyConnectedBeforeJoin(io, playerName, chosenRoom);
-  }
-});
+   emitMsgToRoomPlayers(io, "UPDATED_CURRENT_ROOM", updatedRoom);
+   // 👇 Notify dummy room users about the new player in a real room
+   notifyConnectedBeforeJoin(io, playerName, updatedRoom);
+ });
 
 
     socket.on("REMOVE_PLAYER_FROM_ROOM", ( {requestedRoom, playerName} ) => {
