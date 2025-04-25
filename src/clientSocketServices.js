@@ -111,10 +111,10 @@ export const updateCardSize = (setCardSize) => {
   });
 };
 
-export const removeUpdatedDummyRoomListener = () => {
-  ////console.log("removeUpdatedDummyRoomListener -- REMOVING SOCKER from UPDATED_CURRENT_ROOM")
-  socket.off("UPDATED_CURRENT_ROOM");
-};
+// export const removeUpdatedDummyRoomListener = () => {
+//     console.log("removeUpdatedDummyRoomListener -- REMOVING SOCKER from UPDATED_CURRENT_ROOM")
+//   socket.off("UPDATED_CURRENT_ROOM");
+// };
 
 export const removeUpdatedRoomDataListener = () => {
   ////console.log("removeUpdatedRoomDataListener -- REMOVING SOCKER from UPDATED_CURRENT_ROOM")
