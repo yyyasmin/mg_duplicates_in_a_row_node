@@ -163,7 +163,7 @@ const RoomsList = ({ userName, roomsInitialData }) => {
     };
   
     getDummyRoom();
-  }, [dummyRoom], userName); // ✅ This will only run when dummyRoom changes
+  }, [dummyRoom, userName] ); // ✅ This will only run when dummyRoom changes
   
 
   // When the room changes, navigate to the new room
