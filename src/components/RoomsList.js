@@ -7,7 +7,7 @@ import { ROOMS_PER_GAME } from "../helpers/init";
 import {
   updateCr,
   updateDummyRoom,
-  removeUpdatedDummyRoomListener,
+  //removeUpdatedDummyRoomListener,
   removeUpdatedRoomDataListener,
   removeUpdatedChangedRoomListener,
   emitConnectedAndGetDummyRoom,
@@ -140,32 +140,31 @@ const RoomsList = ({ userName, roomsInitialData }) => {
   console.log("IN start of RoomsList -- dummyRoom", dummyRoom);
 
   useEffect(() => {
-    //const handleUpdateCr = (room) => setCr(room);
-    //updateCr(handleUpdateCr);
+    // This effect runs only once when userName changes.
     updateCr(setCr);
     updateDummyRoom(setDummyRoom);
+  
+    return () => {
+      removeUpdatedRoomDataListener(); // ✅ Clean up listener here
+    };
+  }, [userName]);
+  
 
-
+  useEffect(() => {
     const getDummyRoom = async () => {
-      console.log("IN getDummyRoom -- dummyRoom: ", dummyRoom);
       if (!isEmpty(dummyRoom) && !isEmpty(userName)) {
+        console.log("IN getDummyRoom -- dummyRoom: ", dummyRoom);
+
         await emitConnectedAndGetDummyRoom({
           dummyRoom: dummyRoom,
           playerName: userName,
         });
       }
     };
-
+  
     getDummyRoom();
-    return () => {
-      removeUpdatedRoomDataListener();
-    };
-  }, [userName]);
-
-  //DEBUG  
-  useEffect(() => {
-    console.log("IN DEBUG useEffect -- dummyRoom: ", dummyRoom);
-  }, [dummyRoom]);
+  }, [dummyRoom], userName); // ✅ This will only run when dummyRoom changes
+  
 
   // When the room changes, navigate to the new room
   useEffect(() => {
