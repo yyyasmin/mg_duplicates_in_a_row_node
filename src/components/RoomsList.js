@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback  } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import isEmpty from "../helpers/isEmpty";
@@ -166,28 +166,28 @@ const RoomsList = ({ userName, roomsInitialData }) => {
   }, [dummyRoom, userName] ); // ✅ This will only run when dummyRoom changes
   
 
-  // When the room changes, navigate to the new room
-  useEffect(() => {
-    if (!isEmpty(currentRoom)) {
-      console.log("IN NEVIGATE -- currentRoom:", currentRoom);
-      navigate(`/game/${currentRoom.id}`, {
-        state: { userName, currentRoom },
-      });
-    }
-  }, [currentRoom, navigate, userName]);
+ // When the room changes, navigate to the new room
+useEffect(() => {
+  if (!isEmpty(currentRoom)) {
+    console.log("IN NEVIGATE -- currentRoom:", currentRoom);
+    navigate(`/game/${currentRoom.id}`, {
+      state: { userName, currentRoom },
+    });
+  }
+}, [currentRoom, navigate, userName]);
 
-  const handleJoinRoom = async (room) => {
-    if (!isEmpty(room) && !isEmpty(userName)) {
-      const fullRoom = roomsInitialData.find((r) => r.id === room.id) || room;
-      await emitAddMemberToRoom({
-        chosenRoom: fullRoom,
-        playerName: userName,
-      });
-    }
-  };
+const handleJoinRoom = async (room) => {
+  if (!isEmpty(room) && !isEmpty(userName)) {
+    const fullRoom = roomsInitialData.find((r) => r.id === room.id) || room;
+    await emitAddMemberToRoom({
+      chosenRoom: fullRoom,
+      playerName: userName,
+    });
+  }
+};
 
-// **New Code: Handle room update when a new player joins**
-const handleOtherPlayerJoinedRealRoom = (data) => {
+// ✅ CHANGED: Wrapped the function in useCallback to fix redeclaration and lint issue
+const handleOtherPlayerJoinedRealRoom = useCallback((data) => {
   const updatedRoom = roomsData.find((room) => room.id === data.joinedRoomId);
   if (updatedRoom) {
     const updatedRoomData = {
@@ -202,7 +202,7 @@ const handleOtherPlayerJoinedRealRoom = (data) => {
     );
     setRoomsData(updatedRooms);
   }
-};
+}, [roomsData, setRoomsData]);
 
 useEffect(() => {
   otherPlayerJoinedRoom(setChangedRoom);
@@ -216,7 +216,8 @@ useEffect(() => {
     console.log("Triggered handleOtherPlayerJoinedRealRoom due to changedRoom", changedRoom);
     handleOtherPlayerJoinedRealRoom(changedRoom);
   }
-}, [changedRoom]);
+}, [changedRoom, handleOtherPlayerJoinedRealRoom]); // ✅ SAFE: No more warning, no infinite loop
+
 
 
   return (
