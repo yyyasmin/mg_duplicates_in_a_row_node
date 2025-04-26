@@ -37,5 +37,18 @@
     "endGame": false,
     "info": "https://youtu.be/iTWpoThcuK0?t=2",
     "frameColor": "#5dade2"
+  },
+  {
+    "id": "4",
+    "name": "שכלל את שפת הגוף שלך",
+	"linkTilte": "שפת גוף",
+    "gameName": "bodyLanguage",
+    "difficulty": 2,
+    "maxMembers": 2,
+    "currentPlayers": [],
+    "startGame": false,
+    "endGame": false,
+    "info": "https://www.youtube.com/watch?v=nM2e5SR38v8",
+    "frameColor": "#fad7a0"
   }
 ]

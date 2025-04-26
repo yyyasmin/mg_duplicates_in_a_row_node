@@ -79,13 +79,18 @@ const RoomItemWrapper = styled.li`
 `;
 
 const RoomImageWrapper = styled.div`
-  width: ${(props) => `calc(${100 / props.roomsPerGame}% - 20px)`}; // subtracting margin for spacing
+  width: 100%; // ✅ make it full width of the parent
   height: 20vw;
-  background-image: url(${(props) => props.backgroundImage});
+  background-image: ${(props) => {
+    const fullPath = props.backgroundImage;
+    console.log("Background image path: ", fullPath);
+    return `url(${fullPath})`;
+  }};
   background-size: cover;
   background-position: center;
   border-radius: 5px;
 `;
+
 
 const JoinButton = styled.button`
   background-color: ${(props) => props.btnColor};
@@ -249,7 +254,7 @@ useEffect(() => {
       <RoomList>
         {roomsData.map((room, i) => {
           if (room.id[2] !== '0') {
-            console.log(`Rendering index:${i} room-id:${room.id} room-id-2:${room.id[2]}  ${room.id[2]==='0'}`);
+            //console.log(`Rendering index:${i} room-id:${room.id} room-id-2:${room.id[2]}  ${room.id[2]==='0'}`);
           }
 
           if (room.id[2] === '0') {
@@ -259,7 +264,12 @@ useEffect(() => {
 
           return (
             <RoomItemWrapper key={room.id} frameColor={room.frameColor} roomsPerGame={ROOMS_PER_GAME + 1}>
-              <RoomImageWrapper backgroundImage={room.backgroundImage} />
+              
+			  <RoomImageWrapper
+			    backgroundImage={room.backgroundImage}
+			  />
+
+			  
               <PlayersSection>
                 <PlayersTitle>Current Players:</PlayersTitle>
                 <PlayersList>

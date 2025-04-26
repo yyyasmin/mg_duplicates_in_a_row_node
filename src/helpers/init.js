@@ -4,7 +4,8 @@ import { knowYourFriend } from "./GameCards/knowYourFriend.js";
 import { getToKnowYourGameMate } from "./GameCards/getToKnowYourGameMate.js";
 //import { pesachQuestions, pesachQuestionsBg } from "./GameCards/pesachQuestions.js";
 import { pesachQuestions } from "./GameCards/pesachQuestions.js";
-import { CHOSEN_NODE_URL } from "./ServerRoutes.js";
+import { bodyLanguage } from "./GameCards/bodyLanguage.js";
+import { CHOSEN_NODE_URL, CHOSEN_BROWSER_URL } from "./ServerRoutes.js";
 import { pickRandom8cards, shuffle } from "./shuffle";
 //import isEmpty from "./isEmpty";
 
@@ -51,7 +52,7 @@ async function fetchActiveRooms(rooms) {
     return roomFullData;
 
   } catch (error) {
-    console.error("Error fetching active rooms:", error);
+    //console.error("Error fetching active rooms:", error);
     return null;
   }
 }
@@ -115,9 +116,15 @@ export const calculateCardSize = (cardsNum) => {
 
 
 const initCardsInRoom = async (room, importPaths, backgroundImages) => {
-  const backgroundImage = backgroundImages[room.gameName] || null;
+  //const backgroundImage = backgroundImages[room.gameName] || null;
+  const backgroundImage = backgroundImages[room.gameName] 
+  ? `${CHOSEN_BROWSER_URL}${backgroundImages[room.gameName]}`
+  : null;
+  
+  console.log("IN initCardsInRoom -- backgroundImage: ", backgroundImage)
+
   const jsonURL = `${CHOSEN_NODE_URL}/database/GameCards/${room.gameName}.json`;
-  console.log("jsonURL: ", jsonURL)
+  //console.log("jsonURL: ", jsonURL)
   const cardsData = await fetchDataFromJSON(jsonURL);
 
   if (!cardsData || !Array.isArray(cardsData.gameCards) || cardsData.gameCards.length === 0) {
@@ -160,13 +167,16 @@ const initCardsInRoomsFromJson = async (rooms) => {
     knowYourFriend: knowYourFriend.slice(1),
     getToKnowYourGameMate: getToKnowYourGameMate.slice(1),
     pesachQuestions: pesachQuestions.slice(1),
+    bodyLanguage: bodyLanguage.slice(1),
   };
 
   const backgroundImages = {
     knowYourFriend: knowYourFriend[0],
     getToKnowYourGameMate: getToKnowYourGameMate[0],
     pesachQuestions: pesachQuestions[0],
+    bodyLanguage: bodyLanguage[0],
   };
+  console.log("IN initCardsInRoomsFromJson -- backgroundImages: ", backgroundImages)
 
   const processedRooms = [];
   const groupedRoomsArr = []
@@ -178,13 +188,17 @@ const initCardsInRoomsFromJson = async (rooms) => {
 		processedRooms.length = 0;
    }
   }
+  console.log("groupedRoomsArr: ", groupedRoomsArr)
   return groupedRoomsArr;
 };
 
 
 const initRoomsFromJson = async () => {
   const jsonURL = `${CHOSEN_NODE_URL}/database/rooms.json`;
+//console.log("IN initRoomsFromJson -- jsonURL: ",jsonURL )
   const roomsData = await fetchDataFromJSON(jsonURL);
+//console.log("IN initRoomsFromJson -- roomsData: ",roomsData )
+
   if (roomsData) {
     let newRooms = [];
     roomsData.forEach((room) => {
@@ -197,6 +211,7 @@ const initRoomsFromJson = async () => {
         });
       }
     });
+	//console.log("IN initRoomsFromJson: ", newRooms)
     return newRooms;
   }
   return [];
@@ -211,7 +226,6 @@ export const initRoomsFunc = async () => {
   const updatedRooms = allRooms.map(roomArray => {
     const updatedRoomArray = roomArray.map(room => {
       const activeRoom = flatActiveRooms.find(activeRoom => activeRoom.id === room.id);
-      //console.log("FOUND MATCHING ROOM ID:", room.id, activeRoom, activeRoom?.currentPlayers || []);
       return {
         ...room,
         currentPlayers: activeRoom?.currentPlayers || [],

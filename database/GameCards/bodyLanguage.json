@@ -1,0 +1,110 @@
+{
+    "gameName": "bodyLanguage",
+    "id": 1,
+    "gameCards": [
+        {
+            "id": "1",
+            "name": "p1",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p1.png",
+            "fileNameWithSufix": "p1.png",
+            "background": "red",
+            "text1": "תאר איך אתה מרגיש ברגע זה בעזרת פנטומימה בלבד",
+            "text2": "תאר את הרגש שחברך למשחק מציג בפנטומימה במילה אחת בלבד",
+            "text3": "תאר איך אתה מרגיש ברגע זה בעזרת פנטומימה בלבד",
+            "text4": "תאר את הרגש שחברך למשחק מציג בפנטומימה במילה אחת בלבד",
+            "faceType": "back"
+        },
+        {
+            "id": "2",
+            "name": "p2",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p2.png",
+            "fileNameWithSufix": "p2.png",
+            "background": "red",
+            "text1": "צייר צורה פשוטה ( עיגול, ריבוע או משולש) בעזרת העיניים בלבד",
+            "text2": "אמור איזה צורה חברך למשחק צייר עם העיניים",
+            "text3": "צייר צורה פשוטה ( עיגול, ריבוע או משולש) בעזרת העיניים בלבד",
+            "text4": "אמור איזה צורה חברך למשחק צייר עם העיניים",
+            "faceType": "back"
+        },
+        {
+            "id": "3",
+            "name": "p3",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p3.png",
+            "fileNameWithSufix": "p3.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "במשך 10 שניות  עשה תנועות עם הידיים",
+            "text4": "עשה דמות מראה לחברך למשחק",
+            "faceType": "back"
+        },
+        {
+            "id": "4",
+            "name": "p4",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p4.png",
+            "fileNameWithSufix": "p4.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה פרצופים מצחיקים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "במשך 10 שניות  עשה פרצופים מצחיקים",
+            "text4": "עשה דמות מראה לחברך למשחק",
+            "faceType": "back"
+        },
+        {
+            "id": "5",
+            "name": "p5",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p5.png",
+            "fileNameWithSufix": "p5.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים",
+            "text2": "עשה דמות מראה הופכת ( תנועות הפוכות) לחברך למשחק",
+            "text3": "במשך 10 שניות  עשה תנועות עם הידיים",
+            "text4": "עשה דמות מראה הופכת ( תנועות הפוכות) לחברך למשחק",
+            "faceType": "back"
+        },
+        {
+            "id": "6",
+            "name": "p6",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p6.png",
+            "fileNameWithSufix": "p6.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה פרצופים מצחיקים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "במשך 10 שניות  עשה פרצופים מצחיקים",
+            "text4": "עשה דמות מראה לחברך למשחק",
+            "faceType": "back"
+        },
+        {
+            "id": "7",
+            "name": "p7",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p7.png",
+            "fileNameWithSufix": "p7.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים והפנים",
+            "text2": "עשה דמות מראה מגדילה ( הגדל את התנועות בהגזמה) לחברך למשחק",
+            "text3": "במשך 10 שניות  עשה תנועות עם הידיים והפנים",
+            "text4": "עשה דמות מראה מגדילה ( הגדל את התנועות בהגזמה) לחברך למשחק",
+            "faceType": "back"
+        },
+        {
+            "id": "8",
+            "name": "p8",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p8.png",
+            "fileNameWithSufix": "p8.png",
+            "background": "red",
+            "text1": "ספר על ארוע נעים שקרה לך בשבוע האחרון",
+            "text2": "חזור על מה שסיפר חברך אבל תגדיל את הדברים בהגזמה",
+            "text3": "ספר על ארוע נעים שקרה לך בשבוע האחרון",
+            "text4": "חזור על מה שסיפר חברך אבל תגדיל את הדברים בהגזמה",
+            "faceType": "back"
+        }
+    ]
+}
