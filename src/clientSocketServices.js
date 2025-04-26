@@ -36,10 +36,6 @@ export const emitCurentRoomChanged = (curentRoom) => {
   socket.emit("CURENT_ROOM_CHANGED", curentRoom);
 };
 
-// export const emitCurentMatchedCards = (cr, matchedCards) => {
-//   socket.emit("MATCHED_CARDS_CHANGED", cr, matchedCards);
-// };
-
 export const emitCurentIsMatched = (cr, isMatched, last2FlippedCards, have_has_word_idx) => {
   console.log("IN emitCurentIsMatched -- cr:", cr)
   console.log("IN emitCurentIsMatched -- last2FlippedCards:", last2FlippedCards)
@@ -47,10 +43,6 @@ export const emitCurentIsMatched = (cr, isMatched, last2FlippedCards, have_has_w
 
   socket.emit("IS_MATCHED_CHANGED", cr, isMatched, last2FlippedCards, have_has_word_idx );
 };
-
-// export const emitCurentCardSize = (cr, cardSize) => {
-//   socket.emit("CARD_SIZE_CHANGED", cr, cardSize );
-// };
 
 export const emitHeartBeat = (playerName) => {
   socket.emit("HEART_BEAT", playerName);
@@ -111,13 +103,13 @@ export const updateCardSize = (setCardSize) => {
   });
 };
 
-// export const removeUpdatedDummyRoomListener = () => {
-//     console.log("removeUpdatedDummyRoomListener -- REMOVING SOCKER from UPDATED_CURRENT_ROOM")
-//   socket.off("UPDATED_CURRENT_ROOM");
-// };
+export const removeUpdatedDummyRoomListener = () => {
+   console.log("removeUpdatedDummyRoomListener -- REMOVING SOCKET from UPDATED_DUMMY_ROOM")
+   socket.off("UPDATED_DUMMY_ROOM");
+};
 
 export const removeUpdatedRoomDataListener = () => {
-  ////console.log("removeUpdatedRoomDataListener -- REMOVING SOCKER from UPDATED_CURRENT_ROOM")
+  console.log("removeUpdatedRoomDataListener -- REMOVING SOCKET from UPDATED_CURRENT_ROOM")
   socket.off("UPDATED_CURRENT_ROOM");
 };
 
