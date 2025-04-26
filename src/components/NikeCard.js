@@ -34,7 +34,7 @@ const NikeCard = (props) => {
   const [cardImageSize, setCardImageSize] = useState({ width: 0, height: 0 });
   
   // DUMMY CMDS - TO AVOID NOT USED VARS BUG
-  //console.log("IN NickCard --  logoSize: ", logoSize)
+  console.log("IN NickCard --  logoSize: ", logoSize)
   console.log("IN NickCard --  cardImageSize: ", cardImageSize)
 
   const handleCardClick = () => {
@@ -47,7 +47,6 @@ const NikeCard = (props) => {
     const { naturalWidth, naturalHeight } = e.target;
     if (type === "logo") {
       setlogoSize({ width: naturalWidth, height: naturalHeight });
-	  console.log("logoSize:", logoSize)
     } else {
       setCardImageSize({ width: naturalWidth, height: naturalHeight });
     }
