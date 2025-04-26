@@ -18,7 +18,7 @@ export const NODE_RENDER_URL = "https://mgduplicatesinarownode-production.up.rai
 
 export const FLASK_RENDER_URL = "https://mgduplicatrsinarowflask-production.up.railway.app";    // Flask on Railway
 
-export const BROWSER_RENDER_URL = "https://mgduplicatrsinarowflask-production.up.railway.app";    // FOR ROOMS SQUARE IMAGE PRDEIX 
+export const BROWSER_RENDER_URL = NODE_RENDER_URL
 
 
 ////// CHOSE ENVIROMENT VARS //////
