@@ -29,6 +29,8 @@ const CardImage = styled.img`
 
 const NikeCard = (props) => {
   const { card, cardSize, faceType, frameColor, toggleCardFlip } = props;
+  
+  console.log("IN NikeCard -- card: ", card)
 
   const [logoSize, setlogoSize] = useState({ width: 0, height: 0 });
   const [cardImageSize, setCardImageSize] = useState({ width: 0, height: 0 });
@@ -55,7 +57,7 @@ const NikeCard = (props) => {
   return (
     <ReactCardFlip isFlipped={faceType === "back"}>
       <CardContainer cardSize={cardSize} frameColor={frameColor} onClick={handleCardClick}>
-        <CardImage src={card.imageImportName} alt={card.name} onLoad={(e) => handleImageLoad(e, "card")} />
+<CardImage src={card.imagePath1} alt={card.name} onLoad={(e) => handleImageLoad(e, "card")} />
       </CardContainer>
 
       <CardContainer cardSize={cardSize} frameColor={frameColor} onClick={handleCardClick}>

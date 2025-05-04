@@ -79,17 +79,16 @@ const RoomItemWrapper = styled.li`
 `;
 
 const RoomImageWrapper = styled.div`
-  width: 100%; // ✅ make it full width of the parent
+  width: 100%;
+  width: 100%;
   height: 20vw;
-  background-image: ${(props) => {
-    const fullPath = props.backgroundImage;
-    console.log("Background image path: ", fullPath);
-    return `url(${fullPath})`;
-  }};
   background-size: cover;
   background-position: center;
   border-radius: 5px;
+  background-image: ${(props) => `url(${props.imagePath})`};
 `;
+
+
 
 
 const JoinButton = styled.button`
@@ -227,6 +226,7 @@ useEffect(() => {
 // CLICKING A ROOM AND SETTING CURRENT-ROOM
   useEffect(() => {
     if (!isEmpty(currentRoom)) {
+      console.log("IN NEVIGATE --cr currentRoom:", currentRoom);
       console.log("IN NEVIGATE -- currentRoom:", currentRoom);
       navigate(`/game/${currentRoom.id}`, {
         state: { userName, currentRoom },
@@ -253,9 +253,8 @@ useEffect(() => {
 
       <RoomList>
         {roomsData.map((room, i) => {
-          if (room.id[2] !== '0') {
-            //console.log(`Rendering index:${i} room-id:${room.id} room-id-2:${room.id[2]}  ${room.id[2]==='0'}`);
-          }
+
+console.log("IN roomsList render  -- room.imagePath:", room.imagePath);
 
           if (room.id[2] === '0') {
             console.log(`Skipping index:${i} room-id:${room.id} room-id-2:${room.id[2]}  ${room.id[2]==='0'}`);
@@ -266,7 +265,7 @@ useEffect(() => {
             <RoomItemWrapper key={room.id} frameColor={room.frameColor} roomsPerGame={ROOMS_PER_GAME + 1}>
               
 			  <RoomImageWrapper
-			    backgroundImage={room.backgroundImage}
+			    imagePath={room.imagePath}
 			  />
 
 			  

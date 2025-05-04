@@ -1,0 +1,110 @@
+{
+    "gameName": "bodyLanguage",
+    "id": 1,
+    "gameCards": [
+        {
+            "id": "1",
+            "name": "p1",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p1.png",
+            "fileNameWithSufix": "p1.png",
+            "background": "red",
+            "text1": "תאר איך אתה מרגיש ברגע זה בעזרת פנטומימה בלבד",
+            "text2": "תאר את הרגש שחברך למשחק מציג בפנטומימה במילה אחת בלבד",
+            "text3": "Describe how you feel right now using only pantomime.",
+            "text4": "Describe the emotion your playmate is pantomiming in just one word.",
+            "faceType": "back"
+        },
+        {
+            "id": "2",
+            "name": "p2",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p2.png",
+            "fileNameWithSufix": "p2.png",
+            "background": "red",
+            "text1": "צייר צורה פשוטה ( עיגול, ריבוע או משולש) בעזרת העיניים בלבד",
+            "text2": "אמור איזה צורה חברך למשחק צייר עם העיניים",
+            "text3": "Draw a simple shape (circle, square, or triangle) using only your eyes.",
+            "text4": "Say what shape your playmate drew with his eyes.",
+            "faceType": "back"
+        },
+        {
+            "id": "3",
+            "name": "p3",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p3.png",
+            "fileNameWithSufix": "p3.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "For 10 seconds, make movements with your hands.",
+            "text4": "Make a mirror image of your game friend",
+            "faceType": "back"
+        },
+        {
+            "id": "4",
+            "name": "p4",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p4.png",
+            "fileNameWithSufix": "p4.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה פרצופים מצחיקים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "For 10 seconds, make funny faces.",
+            "text4": "Make a mirror image of your game friend",
+            "faceType": "back"
+        },
+        {
+            "id": "5",
+            "name": "p5",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p5.png",
+            "fileNameWithSufix": "p5.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים",
+            "text2": "עשה דמות מראה הופכת ( תנועות הפוכות) לחברך למשחק",
+            "text3": "For 10 seconds, make movements with your hands.",
+            "text4": "Make a mirror image (reverse movements) for your playmate",
+            "faceType": "back"
+        },
+        {
+            "id": "6",
+            "name": "p6",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p6.png",
+            "fileNameWithSufix": "p6.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה פרצופים מצחיקים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "For 10 seconds, make funny faces.",
+            "text4": "Make a mirror image of your game friend",
+            "faceType": "back"
+        },
+        {
+            "id": "7",
+            "name": "p7",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p7.png",
+            "fileNameWithSufix": "p7.png",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים והפנים",
+            "text2": "עשה דמות מראה מגדילה ( הגדל את התנועות בהגזמה) לחברך למשחק",
+            "text3": "For 10 seconds, make movements with your hands and face.",
+            "text4": "Make a magnifying mirror image (exaggerate the movements) for your playmate.",
+            "faceType": "back"
+        },
+        {
+            "id": "8",
+            "name": "p8",
+            "fileFolder": "../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../assets/textures/bodyLanguage/png/p8.png",
+            "fileNameWithSufix": "p8.png",
+            "background": "red",
+            "text1": "ספר על ארוע נעים שקרה לך בשבוע האחרון",
+            "text2": "חזור על מה שסיפר חברך אבל תגדיל את הדברים בהגזמה",
+            "text3": "Tell me about a pleasant event that happened to you last week.",
+            "text4": "Repeat what your friend said but exaggerate things.",
+            "faceType": "back"
+        }
+    ]
+}

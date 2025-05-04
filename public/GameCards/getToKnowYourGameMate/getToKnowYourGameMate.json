@@ -1,0 +1,102 @@
+  {
+      "gameName":"getToKnowYourGameMate",
+      "id": 1,
+      "gameCards":[
+       {
+			"id":"1",
+			"name":"p1",
+			"background":"red",
+			"text1":"בחר נושא שמעניין אותך ודבר עליו במשך 20 שניות",
+			"text2":"סכם בשלושה משפטים את מה שחברך למשחק אמר",
+			"text3":"Choose a topic that interests you and talk about it for 20 seconds",
+			"text4":"Summarize in three sentences what your playmate said",
+			"imagePath1": "/GameCards/getToKnowYourGameMate/png1/p1.png",
+			"imagePath2": "/GameCards/getToKnowYourGameMate/png2/p1.png",
+			"faceType": "back"
+        },
+        {
+            "id":"2",
+            "name":"p2",
+            "background":"red",
+            "text1":"אמור חמישה דברים שאתה אוהב בחברך למשחק",
+            "text2":"תן 3 דוגמאות ל-איך הדברים שאמר  חברך למשחק מתבטאים",
+            "text3":"Name five things you like about your playmate",
+            "text4":"Give 3 examples of how the things your playmate said are expressed",
+			"imagePath1": "/GameCards/getToKnowYourGameMate/png1/p2.png",
+			"imagePath2": "/GameCards/getToKnowYourGameMate/png2/p2.png",
+            "faceType": "back"
+        },
+        {
+            "id":"3",
+            "name":"p3",
+            "background":"red",
+            "text1":"ספר על חוויה מעצבנת שקרתה לך",
+            "text2":"חזור על מה שסיפר חברך למשחק אבל הפוך",
+            "text3":"Tell about an annoying experience that happened to you",
+            "text4":"Repeat what your playmate told but in reverse",
+			"imagePath1": "/GameCards/getToKnowYourGameMate/png1/p3.png",
+			"imagePath2": "/GameCards/getToKnowYourGameMate/png2/p3.png",
+            "faceType": "back"
+        },
+        {
+            "id":"4",
+            "name":"p4",
+            "background":"red",
+            "text1":"אמור 4 דברים שהיית רוצה לעשות עם חברך למשחק השבוע",
+            "text2":"בחר 2 דברים מתוך מה שאמר חברך למשחק וקבע זמן לעשות אותם בתוך השבוע הקרוב",
+			"text3":"Name 4 things you would like to do with your playmate this week",
+            "text4":"Choose 2 things from what your playmate said and set a time to do them within the next week",
+			"imagePath1": "/GameCards/getToKnowYourGameMate/png1/p4.png",
+			"imagePath2": "/GameCards/getToKnowYourGameMate/png2/p4.png",
+            "faceType": "back"
+        },   
+        {
+            "id": "5",
+            "name":"p5",
+            "background":"red",
+            "text1":"אמור 4 דברים שיהיו ביום המושלם שלך",
+            "text2":"בחר 2 דברים מתוך מה שאמר חברך למשחק ותאר איך תשתתף בהם",
+			"text3":"Name 4 things that would make your perfect day",
+            "text4":"Choose 2 things from what your playmate said and describe how you will take a part in them",
+			"imagePath1": "/GameCards/getToKnowYourGameMate/png1/p5.png",
+			"imagePath2": "/GameCards/getToKnowYourGameMate/png2/p5.png",
+            "faceType": "back"
+        },
+        {
+            "id": "6",
+            "name":"p6",
+            "background":"red",
+            "text1":"אמור 4 דברים שמעוררים בך השראה בחברך למשחק",
+            "text2":"תן 2 דוגמאות לאיך מה שאמר חברך למשחק מתבטאים",
+			"text3":"Name 4 things that inspire you in your playmate",
+            "text4":"Give 2 examples of how what your playmate said shows up",
+			"imagePath1": "/GameCards/getToKnowYourGameMate/png1/p6.png",
+			"imagePath2": "/GameCards/getToKnowYourGameMate/png2/p6.png",
+            "faceType": "back"
+        },
+        {
+            "id": "7",
+            "name":"p7",
+            "background":"red",
+            "text1":"אמור 2 דברים שמצא חן בעיניכם שחברכם למשחק עשה",
+            "text2":"תאר את הרגש שמה שאמר חברך למשחק מעורר בך",
+			"text3":"Name 2 things you liked that your playmate did",
+            "text4":"Describe the feeling that comes up by what your playmate said",
+			"imagePath1": "/GameCards/getToKnowYourGameMate/png1/p7.png",
+			"imagePath2": "/GameCards/getToKnowYourGameMate/png2/p7.png",
+            "faceType": "back"
+        },
+        {
+            "id": "8",
+            "name":"p8",
+            "background":"red",
+            "text1":"אמור 2 משפטים שחברך למשחק אמר שהכי השפיעו עליך.",
+            "text2":"ספר מה הכי הפתיע אותך בדברים שהחבר שלך למשחק הזכיר",
+			"text3":"Say 2 sentences your playmate said that had the most impact on you.",
+            "text4":"Tell what surprised you the most about the  things your playmate mentioned",
+			"imagePath1": "/GameCards/getToKnowYourGameMate/png1/p8.png",
+			"imagePath2": "/GameCards/getToKnowYourGameMate/png2/p8.png",
+            "faceType": "back"
+        } 
+      ]
+   }

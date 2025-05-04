@@ -4,9 +4,11 @@ import NikeCard from "./NikeCard";
 import Players from "./Players";
 import isEmpty from "../helpers/isEmpty";
 import MatchedCards from "./MatchedCards";
+
 import TougleMatchedCardButton from "./TougleMatchedCardButton";
+import ChooseNextGameButton from "./ChooseNextGameButton";
+
 import { useLocation } from "react-router-dom";
-//import { calculateCardSize, getCardsContainerHeight } from "../helpers/init";
 import { calculateCardSize } from "../helpers/init";
 
 
@@ -41,14 +43,6 @@ const InfoContainer = styled.div`
   align-items: center;
   margin-bottom: 0.5rem;
 `;
-
-//const PlayersMsg = styled.p`
-//  margin-right: 1rem; /* Add space between players info and button */
-//`;
-
-//const KeepGoingButton = styled.button`
-//  font-size: 1rem; /* Decreased font size */
-//`;
 
 const CardGallery = styled.div`
   display: grid;
@@ -86,6 +80,7 @@ function Game() {
   const [secondCardFlipped, setSecondCardFlipped] = useState(false);
   const [secondCardFlippedBack, setSecondCardFlippedBack] = useState(false);
   const [toggleFlag, setToggleFlag] = useState(false);
+  const [matchedPairs, setMatchedPairs] = useState(0);
 
   const broadcastChangeCr = async (updatedCr) => {
     //console.log("ÏN broadcastChangeCr -- updatedCr:", updatedCr)
@@ -219,31 +214,32 @@ function Game() {
     });
   };
 
-  const checkForMatch = (updatedCard) => {
-    const newAllFlippedCards = [...allFlippedCards, updatedCard];
-    let tmpIsMatched = false;
-    let updatedLast2FlippedCards = [];
+const checkForMatch = (updatedCard) => {
+  const newAllFlippedCards = [...allFlippedCards, updatedCard];
+  let tmpIsMatched = false;
+  let updatedLast2FlippedCards = [];
 
-    setAllFlippedCards(newAllFlippedCards);
-    if (newAllFlippedCards.length % 2 === 0) {
-      const last2FlippedCards = newAllFlippedCards.slice(-2);
-      if (last2FlippedCards[0].name === last2FlippedCards[1].name) {
-        tmpIsMatched = true;
-      }
-      if (tmpIsMatched) {
-        updatedLast2FlippedCards = last2FlippedCards.map((card) => ({
-          ...card,
-          faceType: "matched",
-        }));
-        broadcastChangeIsMatched(true, updatedLast2FlippedCards);
-        cr.cardsData = updateMatchingCards(cr.cardsData, updatedLast2FlippedCards);
-      } else {
-        broadcastChangeIsMatched(false, last2FlippedCards);
-        cr.cardsData = updateMatchingCards(cr.cardsData, last2FlippedCards);
-      }
-      broadcastChangeCr(cr);
+  setAllFlippedCards(newAllFlippedCards);
+  if (newAllFlippedCards.length % 2 === 0) {
+    const last2FlippedCards = newAllFlippedCards.slice(-2);
+    if (last2FlippedCards[0].name === last2FlippedCards[1].name) {
+      tmpIsMatched = true;
     }
-  };
+    if (tmpIsMatched) {
+      updatedLast2FlippedCards = last2FlippedCards.map((card) => ({
+        ...card,
+        faceType: "matched",
+      }));
+      broadcastChangeIsMatched(true, updatedLast2FlippedCards);
+      cr.cardsData = updateMatchingCards(cr.cardsData, updatedLast2FlippedCards);
+      setMatchedPairs((prev) => prev + 1);  // Increment matched pairs count
+    } else {
+      broadcastChangeIsMatched(false, last2FlippedCards);
+      cr.cardsData = updateMatchingCards(cr.cardsData, last2FlippedCards);
+    }
+    broadcastChangeCr(cr);
+  }
+};
 
 
   const getCardIndexByCardId = (cardId) => {
@@ -305,6 +301,7 @@ function Game() {
 
   const handleCardFlip = async (cardId) => {
 
+    console.log("IN GAME -- handleCardFlip -- cardId: ", cardId)
     console.log("IN GAME -- handleCardFlip -- cr.currentPlayers: ", cr.currentPlayers)
 
     const currentUserIndex = cr.currentPlayers.findIndex(
@@ -357,19 +354,24 @@ function Game() {
         <div>Welcome to room: {cr.name}</div>
       </Wellcome>
   
-      <InfoContainer>
-        {cr && parseInt(cr.id) >= 0 && cr.currentPlayers && cr.currentPlayers.length > 0 && (
-          <Players maxMembers={cr.maxMembers} players={cr.currentPlayers} playerName={userName} />
-        )}
+<InfoContainer>
+  {cr && parseInt(cr.id) >= 0 && cr.currentPlayers && cr.currentPlayers.length > 0 && (
+    <Players maxMembers={cr.maxMembers} players={cr.currentPlayers} playerName={userName} />
+  )}
+
+  {cr && parseInt(cr.id) >= 0 && (
+    <>
+      <TougleMatchedCardButton
+        isMatched={isMatched}
+        broadcastChangeIsMatched={(isMatched, last2FlippedCards) => broadcastChangeIsMatched(isMatched, last2FlippedCards)}
+        setClearFlippedCards={setClearFlippedCards}
+      />
   
-        {cr && parseInt(cr.id) >= 0 && (
-          <TougleMatchedCardButton
-            isMatched={isMatched}
-            broadcastChangeIsMatched={(isMatched, last2FlippedCards) => broadcastChangeIsMatched(isMatched, last2FlippedCards)}
-            setClearFlippedCards={setClearFlippedCards}
-          />
-        )}
-      </InfoContainer>
+      {matchedPairs === 8 && <ChooseNextGameButton />}
+    </>
+  )}
+</InfoContainer>
+
   
       {!isEmpty(cr) && !isEmpty(cr.cardSize) && (
         <CardGallery cardSize={cr.cardSize}>

@@ -1,0 +1,105 @@
+{
+    "gameName": "bodyLanguage",
+    "id": 4,
+    "gameCards": [
+        {
+            "id": "1",
+            "name": "p1",
+            "background": "red",
+            "text1": "תאר איך אתה מרגיש ברגע זה בעזרת פנטומימה בלבד",
+            "text2": "תאר את הרגש שחברך למשחק מציג בפנטומימה במילה אחת בלבד",
+            "text3": "Describe how you feel at this moment with the help of a pantomime only",
+            "text4": "Describe the emotion that your friend for the game presents in only one word",
+			"imagePath1": "/GameCards/bodyLanguage/png1/p1.png",
+			"imagePath2": "/GameCards/bodyLanguage/png2/p1.png",
+            "faceType": "back"
+        },
+        {
+            "id": "2",
+            "name": "p2",
+            "background": "red",
+            "text1": "צייר צורה פשוטה ( עיגול, ריבוע או משולש) בעזרת העיניים בלבד",
+            "text2": "אמור איזה צורה חברך למשחק צייר עם העיניים",
+            "text3": "Painting a simple form (circle, square or triangle) with the help of the eyes",
+            "text4": "Say what shape of your friend to play a painter with eyes",
+			"imagePath1": "/GameCards/bodyLanguage/png1/p2.png",
+			"imagePath2": "/GameCards/bodyLanguage/png2/p2.png",
+            "faceType": "back"
+        },
+        {
+            "id": "3",
+            "name": "p3",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "For 10 seconds made movements with your hands",
+            "text4": "Make a mirror character to your friend for a game",
+			"imagePath1": "/GameCards/bodyLanguage/png1/p3.png",
+			"imagePath2": "/GameCards/bodyLanguage/png2/p3.png",
+            "faceType": "back"
+        },
+        {
+            "id": "4",
+            "name": "p4",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה פרצופים מצחיקים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "For 10 seconds made funny faces",
+            "text4": "Make a mirror character to your friend for a game",
+			"imagePath1": "/GameCards/bodyLanguage/png1/p4.png",
+			"imagePath2": "/GameCards/bodyLanguage/png2/p4.png",
+            "faceType": "back"
+        },
+        {
+            "id": "5",
+            "name": "p5",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים",
+            "text2": "עשה דמות מראה הופכת ( תנועות הפוכות) לחברך למשחק",
+            "text3": "For 10 seconds made movements with your hands",
+            "text4": "Made a mirror figure becomes (opposite movements) to your game",
+			"imagePath1": "/GameCards/bodyLanguage/png1/p5.png",
+			"imagePath2": "/GameCards/bodyLanguage/png2/p5.png",
+            "faceType": "back"
+        },
+        {
+            "id": "6",
+            "name": "p6",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה פרצופים מצחיקים",
+            "text2": "עשה דמות מראה לחברך למשחק",
+            "text3": "For 10 seconds made funny faces",
+            "text4": "Make a mirror character to your friend for a game",
+			"imagePath1": "/GameCards/bodyLanguage/png1/p6.png",
+			"imagePath2": "/GameCards/bodyLanguage/png2/p6.png",
+            "faceType": "back"
+        },
+        {
+            "id": "7",
+            "name": "p7",
+            "background": "red",
+            "text1": "במשך 10 שניות  עשה תנועות עם הידיים והפנים",
+            "text2": "עשה דמות מראה מגדילה ( הגדל את התנועות בהגזמה) לחברך למשחק",
+            "text3": "For 10 seconds made movements with the hands and face",
+            "text4": "Made a growing appearance figure (growing the exaggerated movements) to your game",
+			"imagePath1": "/GameCards/bodyLanguage/png1/p7.png",
+			"imagePath2": "/GameCards/bodyLanguage/png2/p7.png",
+            "faceType": "back"
+        },
+        {
+            "id": "8",
+            "name": "p8",
+            "fileFolder": "../../../assets/textures/bodyLanguage/png",
+            "fileFullPath": "../../../assets/textures/bodyLanguage/png/p8.png",
+            "fileNameWithSufix": "p8.png",
+            "background": "red",
+            "text1": "ספר על ארוע נעים שקרה לך בשבוע האחרון",
+            "text2": "חזור על מה שסיפר חברך אבל תגדיל את הדברים בהגזמה",
+            "text3": "Tell about a pleasant event that happened to you in the last week",
+            "text4": "Repeat what your friend told but will increase things in exaggeration",
+			"imagePath1": "/GameCards/bodyLanguage/png1/p2.png",
+			"imagePath2": "/GameCards/bodyLanguage/png2/p2.png",
+            "faceType": "back"
+        }
+    ]
+}

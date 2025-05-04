@@ -1,13 +1,5 @@
-//mport { knowYourFriend, knowYourFriendBg } from "./GameCards/knowYourFriend.js";
-import { knowYourFriend } from "./GameCards/knowYourFriend.js";
-//import { getToKnowYourGameMate, getToKnowYourGameMateBg } from "./GameCards/getToKnowYourGameMate.js";
-import { getToKnowYourGameMate } from "./GameCards/getToKnowYourGameMate.js";
-//import { pesachQuestions, pesachQuestionsBg } from "./GameCards/pesachQuestions.js";
-import { pesachQuestions } from "./GameCards/pesachQuestions.js";
-import { bodyLanguage } from "./GameCards/bodyLanguage.js";
-import { CHOSEN_NODE_URL, CHOSEN_BROWSER_URL } from "./ServerRoutes.js";
-import { pickRandom8cards, shuffle } from "./shuffle";
-//import isEmpty from "./isEmpty";
+
+import { CHOSEN_NODE_URL } from "./ServerRoutes.js";
 
 export const ROOMS_PER_GAME = 7;
 
@@ -33,10 +25,10 @@ async function fetchActiveRooms(rooms) {
     }
 
     const data = await response.json();
-	
+
     const roomFullData = rooms.map((roomArray) => {
       return roomArray.map((room) => {
-        const matchingRoomData = data.find((roomData) => roomData.id === room.id);	  
+        const matchingRoomData = data.find((roomData) => roomData.id === room.id);
         if (matchingRoomData) {
           return {
             ...room,
@@ -52,17 +44,21 @@ async function fetchActiveRooms(rooms) {
     return roomFullData;
 
   } catch (error) {
-    //console.error("Error fetching active rooms:", error);
     return null;
   }
 }
 
-const fetchDataFromJSON = async (filePath) => {
+const fetchDataFromJSON = async (jsonURL) => {
+  console.log("IN fetchDataFromJSON -- jsonURL: ", jsonURL);
   try {
-    const response = await fetch(filePath);
+    const response = await fetch(jsonURL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
     const data = await response.json();
     return data;
-  } catch (error) {
+  } catch (err) {
+    console.error("Failed to fetch JSON:", err);
     return null;
   }
 };
@@ -114,90 +110,81 @@ export const calculateCardSize = (cardsNum) => {
   };
 };
 
+async function createShuffledCardsArr(gameName) {
+  try {
+    const response = await fetch(`/GameCards/${gameName}/${gameName}.json`);
+    if (!response.ok) throw new Error("Could not load game JSON");
 
-const initCardsInRoom = async (room, importPaths, backgroundImages) => {
-  //const backgroundImage = backgroundImages[room.gameName] || null;
-  const backgroundImage = backgroundImages[room.gameName] 
-  ? `${CHOSEN_BROWSER_URL}${backgroundImages[room.gameName]}`
-  : null;
-  
-  console.log("IN initCardsInRoom -- backgroundImage: ", backgroundImage)
+    const data = await response.json();
+    const cards = data.gameCards;
 
-  const jsonURL = `${CHOSEN_NODE_URL}/database/GameCards/${room.gameName}.json`;
-  //console.log("jsonURL: ", jsonURL)
-  const cardsData = await fetchDataFromJSON(jsonURL);
+    if (!Array.isArray(cards) || cards.length < 8) {
+      throw new Error("Insufficient cards to form 8 pairs.");
+    }
 
-  if (!cardsData || !Array.isArray(cardsData.gameCards) || cardsData.gameCards.length === 0) {
-    return room;
+    const selectedCards = cards.slice(0, 8);
+
+    const pairedCards = selectedCards.flatMap((card) => [
+      { ...card },
+      { ...card },
+    ]);
+
+    const shuffled = pairedCards.sort(() => 0.5 - Math.random());
+
+    const withIds = shuffled.map((card, index) => ({
+      ...card,
+      //id: index + 1,
+      id: index,
+    }));
+	console.log("IN createShuffledCardsArr -- withIds: ", withIds)
+    return withIds;
+  } catch (error) {
+    console.error("Error loading or processing cards:", error);
+    return [];
   }
+}
 
-  const gameCardsRaw = cardsData.gameCards;
-  const arraysObj = pickRandom8cards([...gameCardsRaw], [...importPaths[room.gameName]]);
-
-  const gameCards = arraysObj.shuffledcardsArr.slice(0, 8);
-  const importArr = arraysObj.shuffledimportPathArr.slice(0, 8);
-
-  if (!importArr || importArr.length === 0) {
-    return room;
-  }
-
-  const gameCards1 = gameCards.map((card, index) => ({
-    ...card,
-    imageImportName: importArr[index][0] || undefined,
-  }));
-
-  const gameCards2 = gameCards.map((card, index) => ({
-    ...card,
-    imageImportName: importArr[index][1] || undefined,
-  }));
-
-  const shuffledGameCards = shuffle(gameCards1.concat(gameCards2));
-
-  return {
-    ...room,
-    cardsData: shuffledGameCards,
-    cardSize: calculateCardSize(shuffledGameCards.length),
-    MatchedCardSize: calculateCardSize(2),
-    backgroundImage: backgroundImage,
-  };
-};
 
 const initCardsInRoomsFromJson = async (rooms) => {
-  const importPaths = {
-    knowYourFriend: knowYourFriend.slice(1),
-    getToKnowYourGameMate: getToKnowYourGameMate.slice(1),
-    pesachQuestions: pesachQuestions.slice(1),
-    bodyLanguage: bodyLanguage.slice(1),
-  };
-
-  const backgroundImages = {
-    knowYourFriend: knowYourFriend[0],
-    getToKnowYourGameMate: getToKnowYourGameMate[0],
-    pesachQuestions: pesachQuestions[0],
-    bodyLanguage: bodyLanguage[0],
-  };
-  console.log("IN initCardsInRoomsFromJson -- backgroundImages: ", backgroundImages)
-
   const processedRooms = [];
-  const groupedRoomsArr = []
+  const groupedRoomsArr = [];
+  let cardsData = [];
   for (const room of rooms) {
-    const processedRoom = await initCardsInRoom(room, importPaths, backgroundImages);
-    processedRooms.push(processedRoom);
-	if (processedRooms.length === ROOMS_PER_GAME) {
-		groupedRoomsArr.push([...processedRooms]);  // 
-		processedRooms.length = 0;
-   }
+console.log("IN initCardsInRoomsFromJson -- room: ", room)
+
+    const indexInGroup = processedRooms.length % ROOMS_PER_GAME;
+	
+	cardsData = await createShuffledCardsArr(room.gameName)
+console.log("IN initCardsInRoomsFromJson -- shuffledcardsData: ", cardsData)
+	
+    if (indexInGroup === 0) {
+      processedRooms.push(room);
+    } else {
+		
+console.log("cardsData", cardsData)
+	  if (cardsData && cardsData!=[])  {
+		  const processedRoom = {
+			...room,
+			cardsData: cardsData
+		  };
+          processedRooms.push(processedRoom);
+	      console.log("processedRoom: ", processedRoom)
+	  }
+	}
+    if (processedRooms.length === ROOMS_PER_GAME) {
+      groupedRoomsArr.push([...processedRooms]);
+      processedRooms.length = 0;
+    }
   }
-  console.log("groupedRoomsArr: ", groupedRoomsArr)
+
+  console.log("groupedRoomsArr: ", groupedRoomsArr);
   return groupedRoomsArr;
 };
 
 
 const initRoomsFromJson = async () => {
-  const jsonURL = `${CHOSEN_NODE_URL}/database/rooms.json`;
-//console.log("IN initRoomsFromJson -- jsonURL: ",jsonURL )
+  const jsonURL = `/rooms.json`; // <-- Now fetches from public/rooms.json
   const roomsData = await fetchDataFromJSON(jsonURL);
-//console.log("IN initRoomsFromJson -- roomsData: ",roomsData )
 
   if (roomsData) {
     let newRooms = [];
@@ -211,7 +198,6 @@ const initRoomsFromJson = async () => {
         });
       }
     });
-	//console.log("IN initRoomsFromJson: ", newRooms)
     return newRooms;
   }
   return [];
@@ -220,7 +206,10 @@ const initRoomsFromJson = async () => {
 
 export const initRoomsFunc = async () => {
   const initialRooms = await initRoomsFromJson();
+console.log("initialRooms: ", initialRooms)
   const allRooms = await initCardsInRoomsFromJson(initialRooms);
+console.log("allRooms: ", allRooms)
+
   const activeRooms = await fetchActiveRooms(allRooms);
   const flatActiveRooms = activeRooms.flat();
   const updatedRooms = allRooms.map(roomArray => {

@@ -1,0 +1,54 @@
+  {
+      "gameName":"pesachQuestions",
+      "id": 32,
+      "gameCards":[ 
+         {
+            "id": "1",
+            "name":"p1",
+            "background":"red",
+            "text1":"תאר משהו שחבר שלך למשחק היציע, והתנגדת ובסוף התברר שזה משהו טוב בשבילך",
+            "text2":"תאר משהו שחבר שלך למשחק היציע, והתנגדת ובסוף התברר שזה משהו טוב בשבילך",
+            "text3":"Describe something your playmate have done, and you resisted and in the end it turned out to be something good for you",
+            "text4":"Describe something your playmate have done, and you resisted and in the end it turned out to be something good for you",
+			"imagePath1": "/GameCards/pesachQuestions/png1/p1.png",
+			"imagePath2": "/GameCards/pesachQuestions/png2/p1.png",
+            "faceType": "back"
+        },	 
+         {
+            "id":"2",
+            "name":"p2",
+            "background":"red",
+            "text1":"אם היית חיה , איזה חיה היית? ",
+            "text2":"תן 3 דוגמאות שמתארות איך החיה שבחר חברך למשחק מתאימה לו",
+            "text3":"If you were an animal, what kind of animal would you be?",
+            "text4":"Give 3 examples that describe how the animal your friend chose for the game is suitable for him",
+			"imagePath1": "/GameCards/pesachQuestions/png1/p2.png",
+			"imagePath2": "/GameCards/pesachQuestions/png2/p2.png",
+            "faceType": "back"
+        },
+         {
+         "id":"3",
+         "name":"p3",
+         "background":"red",
+         "text1":"בחר חפץ שלדעתך יכול לייצג את האישיות שלך",
+         "text2":"תן 3 דוגמאות לאיך שהחפץ שחברך למשחק בחר מתאר אותו.",
+         "text3":"Choose an object that you think can represent your personality",
+         "text4":"Give 3 examples of how the object your playmate chose suits his personality",
+			"imagePath1": "/GameCards/pesachQuestions/png1/p3.png",
+			"imagePath2": "/GameCards/pesachQuestions/png2/p3.png",
+            "faceType": "back"
+        },
+         {
+         "id":"4",
+         "name":"p4",
+         "background":"red",
+         "text1":"בחר תכונה שמתאימה לך מבין: מצחיק, מפרגן, מקשיב, דעתן",
+         "text2":"תן דוגמא ל - איך התכונה שבחר חברך למשחק מאפיינת אותו",
+         "text3":"Choose a trait that suits you from: funny, accommodating, listening, opinionated",
+         "text4":"give an example for how the option that your playmate chose suits him.",
+			"imagePath1": "/GameCards/pesachQuestions/png1/p4.png",
+			"imagePath2": "/GameCards/pesachQuestions/png2/p4.png",
+            "faceType": "back"
+        },
+      ]
+   }

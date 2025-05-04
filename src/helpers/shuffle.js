@@ -1,35 +1,49 @@
-export const pickRandom8cards = (cardsArr, importPathArr) => {
-    const shuffledcardsArr = [...cardsArr];
-	const shuffledimportPathArr = [...importPathArr]; // 
+export const shuffle = (cardsArr, importPathArr) => {
+  console.log("IN shuffle -- original cardsArr: ", cardsArr);
+  console.log("IN shuffle -- original importPathArr: ", importPathArr);
 
-    for (let i = shuffledcardsArr.length - 1; i > 0; i--) {
-        // Generate a random index between 0 and i (inclusive)
-        const randomIndex = Math.floor(Math.random() * (i + 1));
-        // Swap elements at i and randomIndex
-        [shuffledcardsArr[i], shuffledcardsArr[randomIndex]] = [shuffledcardsArr[randomIndex], shuffledcardsArr[i]];
-        [shuffledimportPathArr[i], shuffledimportPathArr[randomIndex]] = [shuffledimportPathArr[randomIndex], shuffledimportPathArr[i]];
+  // Step 1: Shuffle the pairs in parallel
+  const indices = [...Array(cardsArr.length).keys()];
+  for (let i = indices.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [indices[i], indices[randomIndex]] = [indices[randomIndex], indices[i]];
+  }
 
-    }
+  // Step 2: Extract 8 random pairs based on shuffled indices
+  const pairedCards = [];
+  for (let i = 0; i < 8; i++) {
+    const index = indices[i];
+    const card = cardsArr[index];
+    const importPair = importPathArr[index];
 
-    for (let i = 0; i < shuffledcardsArr.length; i++) {
-		shuffledcardsArr[i].id = i;
-        shuffledimportPathArr[i].id = i;
-    }
+    const cardA = {
+      ...card,
+      text: card.text1,
+      translatedText: card.text3,
+      imagePath: importPair?.[0],
+    };
 
-    return {shuffledcardsArr, shuffledimportPathArr};
+    const cardB = {
+      ...card,
+      text: card.text2,
+      translatedText: card.text4,
+      imagePath: importPair?.[1],
+    };
+
+    pairedCards.push(cardA, cardB);
+  }
+
+  // Step 3: Shuffle the 16 cards individually
+  for (let i = pairedCards.length - 1; i > 0; i--) {
+    const randomIndex = Math.floor(Math.random() * (i + 1));
+    [pairedCards[i], pairedCards[randomIndex]] = [pairedCards[randomIndex], pairedCards[i]];
+  }
+
+  // Step 4: Assign unique IDs
+  for (let i = 0; i < pairedCards.length; i++) {
+    pairedCards[i].id = i;
+  }
+
+  console.log("IN shuffle -- final pairedCards: ", pairedCards);
+  return pairedCards;
 };
-
-
-export const shuffle = (array) => {
-    const shuffledArray = [...array];
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-        const randomIndex = Math.floor(Math.random() * (i + 1));
-        [shuffledArray[i], shuffledArray[randomIndex]] = [shuffledArray[randomIndex], shuffledArray[i]];
-    }
-
-    for (let i = 0; i < shuffledArray.length; i++) {
-        shuffledArray[i].id = i;
-    }
-    return shuffledArray;
-};
-

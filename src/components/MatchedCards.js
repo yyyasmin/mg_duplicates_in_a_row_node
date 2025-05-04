@@ -87,7 +87,7 @@ const MatchedCards = ({ cardWidth, cardHeight, card, players, index }) => {
       <CardFrame>
         <ToggleButton onClick={toggleLanguage}>{toggleButtonText}</ToggleButton>
         <ImageWrapper>
-          <Image src={card.imageImportName} alt={card.imageImportName} />
+          <Image src={card.imagePath1} alt={card.imagePath1} />
         </ImageWrapper>
         <TextContainer>
           <PlayerName>{playerName}</PlayerName>
