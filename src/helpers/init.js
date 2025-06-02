@@ -1,4 +1,3 @@
-
 import { CHOSEN_NODE_URL } from "./ServerRoutes.js";
 
 export const ROOMS_PER_GAME = 7;
@@ -82,6 +81,14 @@ export const calculateCardSize = (cardsNum) => {
       rows = 1;
       break;
     case 16:
+      cols = 4;
+      rows = 4;
+      break;
+    case 'closingSession':
+      cols = 2;
+      rows = 3;
+      break;
+    case 'food':
       cols = 4;
       rows = 4;
       break;
@@ -211,6 +218,13 @@ console.log("initialRooms: ", initialRooms)
 console.log("allRooms: ", allRooms)
 
   const activeRooms = await fetchActiveRooms(allRooms);
+  
+  // Handle case when server is not available
+  if (!activeRooms || !Array.isArray(activeRooms)) {
+    console.warn("Server not available, using default room data");
+    return allRooms;
+  }
+  
   const flatActiveRooms = activeRooms.flat();
   const updatedRooms = allRooms.map(roomArray => {
     const updatedRoomArray = roomArray.map(room => {

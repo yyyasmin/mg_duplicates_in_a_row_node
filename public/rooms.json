@@ -2,7 +2,7 @@
   {
     "id": "1",
     "name": "Get To know your game mate",
-	"linkTilte": "Whatch active listening example",
+    "linkTilte": "Whatch active listening example",
     "gameName": "getToKnowYourGameMate",
     "difficulty": 2,
     "maxMembers": 2,
@@ -11,26 +11,26 @@
     "endGame": false,
     "info": "https://www.youtube.com/watch?v=t685WM5R6aM",
     "frameColor": "#BA68C8",
-	"imagePath": "/GameCards/getToKnowYourGameMate/getToKnowYourGameMateBg.png"
+    "imagePath": "/GameCards/getToKnowYourGameMate/getToKnowYourGameMateBg.png"
   },
   {
-	"id": "2",
-	"name": "Get to know your freind better while practicing active listening",
-	"linkTilte": "Whatch active listening example",
-	"gameName": "knowYourFriend",
-	"difficulty": 2,
-	"maxMembers": 2,
-	"currentPlayers": [],
-	"startGame": false,
-	"endGame": false,
-	"info": "https://www.youtube.com/watch?v=t685WM5R6aM",
-	"frameColor": "#58d68d",
-	"imagePath": "/GameCards/knowYourFriend/knowYourFriendBg.png"
+    "id": "2",
+    "name": "Get to know your freind better while practicing active listening",
+    "linkTilte": "Whatch active listening example",
+    "gameName": "knowYourFriend",
+    "difficulty": 2,
+    "maxMembers": 2,
+    "currentPlayers": [],
+    "startGame": false,
+    "endGame": false,
+    "info": "https://www.youtube.com/watch?v=t685WM5R6aM",
+    "frameColor": "#58d68d",
+    "imagePath": "/GameCards/knowYourFriend/knowYourFriendBg.png"
   },
   {
     "id": "3",
     "name": "העצמה של פסח practicing active listening",
-	"linkTilte": "איך מתמודדים עם חרם",
+    "linkTilte": "איך מתמודדים עם חרם",
     "gameName": "pesachQuestions",
     "difficulty": 2,
     "maxMembers": 2,
@@ -39,12 +39,12 @@
     "endGame": false,
     "info": "https://youtu.be/iTWpoThcuK0?t=2",
     "frameColor": "#5dade2",
-	"imagePath": "/GameCards/pesachQuestions/pesachQuestionsBg.png"
+    "imagePath": "/GameCards/pesachQuestions/pesachQuestionsBg.png"
   },
   {
     "id": "4",
     "name": "שכלל את שפת הגוף שלך",
-	"linkTilte": "שפת גוף",
+    "linkTilte": "שפת גוף",
     "gameName": "bodyLanguage",
     "difficulty": 2,
     "maxMembers": 2,
@@ -53,6 +53,20 @@
     "endGame": false,
     "info": "https://www.youtube.com/watch?v=nM2e5SR38v8",
     "frameColor": "#fad7a0",
-	"imagePath": "/GameCards/bodyLanguage/bodyLanguageBg.PNG"
+    "imagePath": "/GameCards/bodyLanguage/bodyLanguageBg.png"
+  },
+  {
+    "id": "5",
+    "name": "למד מילים חדשות באנגלית - אוכל",
+    "linkTilte": "למידת אוכל באנגלית",
+    "gameName": "food",
+    "difficulty": 2,
+    "maxMembers": 2,
+    "currentPlayers": [],
+    "startGame": false,
+    "endGame": false,
+    "info": "https://www.youtube.com/watch?v=example",
+    "frameColor": "#ff7675",
+    "imagePath": "/GameCards/food/foodBg.png"
   }
 ]

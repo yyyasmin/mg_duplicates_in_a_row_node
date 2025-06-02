@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ReactCardFlip from "react-card-flip";
-import logo from "../assets/textures/logo.PNG";
 
 const computeBorderColor = (frameColor) => {
   return `border: 0.625rem solid ${frameColor};`; // Converted border width to rem
 };
-
 
 const CardContainer = styled.div`
   cursor: grab;
@@ -17,7 +15,6 @@ const CardContainer = styled.div`
   ${({ frameColor }) => computeBorderColor(frameColor)}
   box-sizing: border-box;
 `;
-
 
 const CardImage = styled.img`
   width: 100%;
@@ -61,7 +58,7 @@ const NikeCard = (props) => {
       </CardContainer>
 
       <CardContainer cardSize={cardSize} frameColor={frameColor} onClick={handleCardClick}>
-        <CardImage src={logo} alt={card.name} onLoad={(e) => handleImageLoad(e, "logo")} />
+        <CardImage src="/logo.PNG" alt={card.name} onLoad={(e) => handleImageLoad(e, "logo")} />
       </CardContainer>
     </ReactCardFlip>
   );

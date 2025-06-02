@@ -179,7 +179,7 @@ const RoomsList = ({ userName, roomsInitialData }) => {
 
 
 // OTHER PLAYER JOINED ANY ROOM
-// Wrap the handler in useCallback so it’s safe to use in dependencies
+// Wrap the handler in useCallback so it's safe to use in dependencies
 const handleOtherPlayerJoinedRealRoom = useCallback((data) => {
   const updatedRoom = roomsData.find((room) => room.id === data.joinedRoomId);
   if (updatedRoom) {
