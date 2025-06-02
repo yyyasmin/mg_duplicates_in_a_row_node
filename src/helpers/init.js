@@ -169,7 +169,7 @@ console.log("IN initCardsInRoomsFromJson -- shuffledcardsData: ", cardsData)
     } else {
 		
 console.log("cardsData", cardsData)
-	  if (cardsData && cardsData!=[])  {
+	  if (cardsData && cardsData.length > 0)  {
 		  const processedRoom = {
 			...room,
 			cardsData: cardsData
