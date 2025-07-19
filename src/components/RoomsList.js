@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import isEmpty from "../helpers/isEmpty";
 import { ROOMS_PER_GAME } from "../helpers/init";
+import { onUpdatedCurrentRoom, removeUpdatedRoomDataListener } from "../clientSocketServices";
 
 import {
-  updateCr,
   updateDummyRoom,
   removeUpdatedDummyRoomListener,
-  removeUpdatedRoomDataListener,
   removeUpdatedChangedRoomListener,
   emitConnectedAndGetDummyRoom,
   emitAddMemberToRoom,
@@ -88,9 +87,6 @@ const RoomImageWrapper = styled.div`
   background-image: ${(props) => `url(${props.imagePath})`};
 `;
 
-
-
-
 const JoinButton = styled.button`
   background-color: ${(props) => props.btnColor};
   color: #fff;
@@ -132,7 +128,9 @@ const PlayersList = styled.div`
   text-align: center;
 `;
 
+
 const RoomsList = ({ userName, roomsInitialData }) => {
+  const roomsInitialDataRef = useRef(roomsInitialData);
   const [currentRoom, setCr] = useState({});
   const [dummyRoom, setDummyRoom] = useState(roomsInitialData?.[0] || {});
   const [roomsData, setRoomsData] = useState(roomsInitialData);
@@ -141,47 +139,66 @@ const RoomsList = ({ userName, roomsInitialData }) => {
   const [hasSentDummyRoom, setHasSentDummyRoom] = useState(false);
   const [otherPlayerJoined, setOtherPlayerJoined] = useState(false);
 
+  //////console.log("IN start of RoomsList -- roomsInitialData", roomsInitialData);
+  //////console.log("IN start of RoomsList -- dummyRoom", dummyRoom);
 
-  console.log("IN start of RoomsList -- roomsInitialData", roomsInitialData);
-  console.log("IN start of RoomsList -- dummyRoom", dummyRoom);
+  useEffect(() => {
+    roomsInitialDataRef.current = roomsInitialData;
+  }, [roomsInitialData]);
 
-// THIS USER CONNECTED  
-	useEffect(() => {
-	  updateCr(setCr);
-	  updateDummyRoom(setDummyRoom); // 👈 Run only once!
+  useEffect(() => {
+    function handleUpdatedCurrentRoom(serverUpdatedCurentRoom) {
+      if (
+        Array.isArray(roomsInitialDataRef.current) &&
+        roomsInitialDataRef.current.some(room => room.id === serverUpdatedCurentRoom.id)
+      ) {
+        console.log("28-28-28 -- RoomsList.js -- handleUpdatedCurrentRoom -- serverUpdatedCurentRoom (FOUND):", serverUpdatedCurentRoom);
+        setCr(serverUpdatedCurentRoom);
+      } else {
+        console.warn("31-31-31 -- RoomsList.js -- handleUpdatedCurrentRoom -- NOT_FOUND: serverUpdatedCurentRoom.id:", serverUpdatedCurentRoom.id);
+      }
+    }
+    onUpdatedCurrentRoom(handleUpdatedCurrentRoom);
+    return () => {
+      removeUpdatedRoomDataListener();
+    };
+  }, []);
 
-	  return () => {
-		removeUpdatedRoomDataListener();
-		removeUpdatedDummyRoomListener();
-	  };
-	}, []);
+  useEffect(() => {
+    console.log("18-18-18 -- RoomsList.js -- useEffect -- roomsInitialData:", roomsInitialData);
+    updateDummyRoom(setDummyRoom); // 👈 Run only once!
+    return () => {
+      removeUpdatedRoomDataListener();
+      removeUpdatedDummyRoomListener();
+    };
+  }, [roomsInitialData]);
 	
 	useEffect(() => {
-		const getDummyRoom = async () => {
-			if (
-				!isEmpty(dummyRoom) &&
-				!isEmpty(userName) &&
-				!hasSentDummyRoom
-			) {
-				await emitConnectedAndGetDummyRoom({
+		////console.log("555 -- IN RoomsList.js -- useEffect -- dummyRoom: ", dummyRoom)
+		////console.log("666 -- IN RoomsList.js -- useEffect -- userName: ", userName)
+    ////console.log("777 -- IN RoomsList.js -- useEffect -- hasSentDummyRoom: ", hasSentDummyRoom)
+
+		if (!hasSentDummyRoom && !isEmpty(dummyRoom) && !isEmpty(userName)) {
+			emitConnectedAndGetDummyRoom({
 				dummyRoom,
 				playerName: userName,
-				});
-				setHasSentDummyRoom(true);
-			}
-		};
-		getDummyRoom();
+			});
+			setHasSentDummyRoom(true);
+		}
 	}, [dummyRoom, userName, hasSentDummyRoom]);
 
   useEffect(() => {
-    console.log("IN useEffect -- dummyRoom: ", dummyRoom);
+    //console.log("25-25-25 -- RoomsList.js -- useEffect -- dummyRoom id:", dummyRoom && dummyRoom.id);
   }, [dummyRoom]);
 
+  useEffect(() => {
+    //console.log("26-26-26 -- RoomsList.js -- useEffect -- currentRoom id:", currentRoom && currentRoom.id);
+  }, [currentRoom]);
 
 // OTHER PLAYER JOINED ANY ROOM
 // Wrap the handler in useCallback so it's safe to use in dependencies
 const handleOtherPlayerJoinedRealRoom = useCallback((data) => {
-  const updatedRoom = roomsData.find((room) => room.id === data.joinedRoomId);
+  const updatedRoom = roomsInitialDataRef.current.find((room) => room.id === data.joinedRoomId);
   if (updatedRoom) {
     const updatedRoomData = {
       ...updatedRoom,
@@ -190,12 +207,12 @@ const handleOtherPlayerJoinedRealRoom = useCallback((data) => {
         { name: data.joinedPlayerName },
       ],
     };
-    const updatedRooms = roomsData.map((room) =>
+    const updatedRooms = roomsInitialDataRef.current.map((room) =>
       room.id === updatedRoom.id ? updatedRoomData : room
     );
     setRoomsData(updatedRooms);
   }
-}, [roomsData]);
+}, []);
 
 
 // Set up the listener for when another player joins a room
@@ -209,7 +226,7 @@ useEffect(() => {
 // When changedRoom is updated with a new join, trigger the flag
 useEffect(() => {
   if (!isEmpty(changedRoom)) {
-    console.log("Triggered handleOtherPlayerJoinedRealRoom due to changedRoom", changedRoom);
+    //////console.log("Triggered handleOtherPlayerJoinedRealRoom due to changedRoom", changedRoom);
     setOtherPlayerJoined(true);
   }
 }, [changedRoom]);
@@ -226,16 +243,23 @@ useEffect(() => {
 // CLICKING A ROOM AND SETTING CURRENT-ROOM
   useEffect(() => {
     if (!isEmpty(currentRoom)) {
-      console.log("IN NEVIGATE --cr currentRoom:", currentRoom);
-      console.log("IN NEVIGATE -- currentRoom:", currentRoom);
-      navigate(`/game/${currentRoom.id}`, {
+      // Remove UPDATED_CURRENT_ROOM listener before navigating
+      removeUpdatedRoomDataListener();
+      const gamePath = `/game/${currentRoom.id}`;
+      console.log("27-27-28 -- RoomsList.js -- useEffect[navigate] -- gamePath:", gamePath);
+      console.log("27-27-27 -- RoomsList.js -- useEffect[navigate] -- currentRoom:", currentRoom);
+      navigate(gamePath, {
         state: { userName, currentRoom },
       });
     }
   }, [currentRoom, navigate, userName]);
+  
 
   const handleJoinRoom = async (room) => {
-    if (!isEmpty(room) && !isEmpty(userName)) {
+//console.log("111 -- in RoomsList -- room: ", room)
+//console.log("222 -- in RoomsList -- userName: ", userName)
+
+	if (!isEmpty(room) && !isEmpty(userName)) {
       const fullRoom = roomsInitialData.find((r) => r.id === room.id) || room;
       await emitAddMemberToRoom({
         chosenRoom: fullRoom,
@@ -243,51 +267,63 @@ useEffect(() => {
       });
     }
   };
+////////console.log("222 -- in RoomsList -- handleJoinRoom: ", handleJoinRoom)
+
   
-  
+  // Flatten roomsData if it's an array of arrays
+  const flatRooms = Array.isArray(roomsData[0]) ? roomsData.flat() : roomsData;
+
+  // --- Group rooms by gameName before rendering ---
+  const groupedGames = flatRooms.reduce((groups, room) => {
+    if (room.id && room.id.split('-')[1] !== '0') {
+      const gameName = room.gameName;
+      if (!groups[gameName]) {
+        groups[gameName] = [];
+      }
+      groups[gameName].push(room);
+    }
+    return groups;
+  }, {});
+
   return (
     <GameContainer>
-      <GameHeading titleColor={roomsData[0].frameColor}>
-        {roomsData[0].name}
-      </GameHeading>
+      {/* Removed CreateGameButton and CreateGameForm from here */}
 
-      <RoomList>
-        {roomsData.map((room, i) => {
+      {Object.values(groupedGames).map((gameGroup, index) => {
+        if (gameGroup.length === 0) {
+          return null; // Don't render empty groups
+        }
+        
+        // Use the first room for the title and color
+        const titleRoom = gameGroup[0];
 
-console.log("IN roomsList render  -- room.imagePath:", room.imagePath);
-
-          if (room.id[2] === '0') {
-            console.log(`Skipping index:${i} room-id:${room.id} room-id-2:${room.id[2]}  ${room.id[2]==='0'}`);
-            return null;
-          }
-
-          return (
-            <RoomItemWrapper key={room.id} frameColor={room.frameColor} roomsPerGame={ROOMS_PER_GAME + 1}>
-              
-			  <RoomImageWrapper
-			    imagePath={room.imagePath}
-			  />
-
-			  
-              <PlayersSection>
-                <PlayersTitle>Current Players:</PlayersTitle>
-                <PlayersList>
-                  Room ID: {room.id} <br />
-                  {room.currentPlayers && room.currentPlayers.length > 0
-                    ? room.currentPlayers.map((player) => player.name).join(", ")
-                    : "No players yet"}
-                </PlayersList>
-              </PlayersSection>
-              <JoinButton
-                btnColor={room.frameColor}
-                onClick={() => handleJoinRoom(room)}
-              >
-                Join
-              </JoinButton>
-            </RoomItemWrapper>
-          );
-        })}
-      </RoomList>
+        return (
+          <div key={index}>
+            <GameHeading titleColor={titleRoom.frameColor}>
+              {titleRoom.name}
+            </GameHeading>
+            <RoomList>
+              {gameGroup.map((room, i) => (
+                <RoomItemWrapper key={room.id} frameColor={room.frameColor} roomsPerGame={ROOMS_PER_GAME}>
+                  <RoomImageWrapper imagePath={room.imagePath} />
+                  <PlayersSection>
+                    <PlayersTitle>Current Players:</PlayersTitle>
+                    <PlayersList>
+                      Room ID: {room.id} <br />
+                      {room.currentPlayers && room.currentPlayers.length > 0
+                        ? room.currentPlayers.map((player) => player.name).join(", ")
+                        : "No players yet"}
+                    </PlayersList>
+                  </PlayersSection>
+                  <JoinButton btnColor={room.frameColor} onClick={() => handleJoinRoom(room)}>
+                    Join
+                  </JoinButton>
+                </RoomItemWrapper>
+              ))}
+            </RoomList>
+          </div>
+        );
+      })}
     </GameContainer>
   );
 };

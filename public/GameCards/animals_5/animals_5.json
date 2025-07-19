@@ -1,0 +1,94 @@
+{
+    "gameName": "animals_5",
+    "id": 99,
+    "gameCards": [
+        {
+            "id": "1",
+            "name": "What sound does a cow make? = A cow says moo.",
+            "imagePath1": "/GameCards/animals_5/png1/p1.png",
+            "imagePath2": "/GameCards/animals_5/png2/p1.png",
+            "faceType": "back",
+            "text1": "What sound does a cow make?",
+            "text2": "Animals fun fact 1",
+            "text3": "Did you know? A cow says moo.",
+            "text4": "Animals challenge: What sound does a cow make?"
+        },
+        {
+            "id": "2",
+            "name": "What animal has a very long neck? = A giraffe has a very long neck.",
+            "imagePath1": "/GameCards/animals_5/png1/p2.png",
+            "imagePath2": "/GameCards/animals_5/png2/p2.png",
+            "faceType": "back",
+            "text1": "What animal has a very long neck?",
+            "text2": "Animals fun fact 2",
+            "text3": "Did you know? A giraffe has a very long neck.",
+            "text4": "Animals challenge: What animal has a very long neck?"
+        },
+        {
+            "id": "3",
+            "name": "Where do fish live? = Fish live in the water.",
+            "imagePath1": "/GameCards/animals_5/png1/p3.png",
+            "imagePath2": "/GameCards/animals_5/png2/p3.png",
+            "faceType": "back",
+            "text1": "Where do fish live?",
+            "text2": "Animals fun fact 3",
+            "text3": "Did you know? Fish live in the water.",
+            "text4": "Animals challenge: Where do fish live?"
+        },
+        {
+            "id": "4",
+            "name": "What big cat has black stripes? = A tiger has black stripes.",
+            "imagePath1": "/GameCards/animals_5/png1/p4.png",
+            "imagePath2": "/GameCards/animals_5/png2/p4.png",
+            "faceType": "back",
+            "text1": "What big cat has black stripes?",
+            "text2": "Animals fun fact 4",
+            "text3": "Did you know? A tiger has black stripes.",
+            "text4": "Animals challenge: What big cat has black stripes?"
+        },
+        {
+            "id": "5",
+            "name": "What does a friendly dog do with its tail? = A friendly dog wags its tail.",
+            "imagePath1": "/GameCards/animals_5/png1/p5.png",
+            "imagePath2": "/GameCards/animals_5/png2/p5.png",
+            "faceType": "back",
+            "text1": "What does a friendly dog do with its tail?",
+            "text2": "Animals fun fact 5",
+            "text3": "Did you know? A friendly dog wags its tail.",
+            "text4": "Animals challenge: What does a friendly dog do with its tail?"
+        },
+        {
+            "id": "6",
+            "name": "What animal hops and has a pouch? = A kangaroo hops and has a pouch.",
+            "imagePath1": "/GameCards/animals_5/png1/p6.png",
+            "imagePath2": "/GameCards/animals_5/png2/p6.png",
+            "faceType": "back",
+            "text1": "What animal hops and has a pouch?",
+            "text2": "Animals fun fact 6",
+            "text3": "Did you know? A kangaroo hops and has a pouch.",
+            "text4": "Animals challenge: What animal hops and has a pouch?"
+        },
+        {
+            "id": "7",
+            "name": "What farm animal says oink? = A pig says oink.",
+            "imagePath1": "/GameCards/animals_5/png1/p7.png",
+            "imagePath2": "/GameCards/animals_5/png2/p7.png",
+            "faceType": "back",
+            "text1": "What farm animal says oink?",
+            "text2": "Animals fun fact 7",
+            "text3": "Did you know? A pig says oink.",
+            "text4": "Animals challenge: What farm animal says oink?"
+        },
+        {
+            "id": "8",
+            "name": "What do busy bees make? = Busy bees make sweet honey.",
+            "imagePath1": "/GameCards/animals_5/png1/p8.png",
+            "imagePath2": "/GameCards/animals_5/png2/p8.png",
+            "faceType": "back",
+            "text1": "What do busy bees make?",
+            "text2": "Animals fun fact 8",
+            "text3": "Did you know? Busy bees make sweet honey.",
+            "text4": "Animals challenge: What do busy bees make?"
+        }
+    ]
+}

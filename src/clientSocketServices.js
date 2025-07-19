@@ -9,21 +9,23 @@ export const emitConnectedAndGetDummyRoom = ( {dummyRoom, playerName} ) => {
 	socket.emit( 'ASIGN_DUMMY_ROOM', { dummyRoom, playerName } );
   }
   else {
-    console.log("tyryig to emit ASIGN_DUMMY_ROOM-- dummyRoom:", dummyRoom, " PLAYER:", playerName) 
+    ////console.log("tyryig to emit ASIGN_DUMMY_ROOM-- dummyRoom:", dummyRoom, " PLAYER:", playerName) 
   }
 };
 
 export const emitAddMemberToRoom = ( {chosenRoom, playerName} ) => {
-  if ( !isEmpty(chosenRoom) && !isEmpty(playerName) ) {       
+  if ( !isEmpty(chosenRoom) && !isEmpty(playerName) ) {
+//console.log("333 -- IN clientSocketServices -- emitAddMemberToRoom -- chosenRoom:", chosenRoom)
+//console.log("444 - IN clientSocketServices -- emitAddMemberToRoom -- playerName:", playerName)
 	socket.emit( 'CREATE_ROOM_AND_ADD_PLAYER', { chosenRoom, playerName } );
   }
   else {
-    console.log("tyryig to emit EMPTY OBJ-- chosenRoom:", chosenRoom, " PLAYER:", playerName) 
+    ////console.log("tyryig to emit EMPTY OBJ-- chosenRoom:", chosenRoom, " PLAYER:", playerName) 
   }
 };
 
 export const emitRemoveMemberFromRoom = ({ chosenRoom, playerName }) => {
-  console.log("IN emitRemoveMemberFromRoom -- chosenRoom:", chosenRoom)
+  ////console.log("IN emitRemoveMemberFromRoom -- chosenRoom:", chosenRoom)
   socket.emit('REMOVE_PLAYER_FROM_ROOM', { chosenRoom, playerName });
 };
 
@@ -32,14 +34,14 @@ export const emitRemoveRoomFromActiveRooms = (roomId) => {
 };
 
 export const emitCurentRoomChanged = (curentRoom) => {
-  console.log("IN emitCurentRoomChanged -- curentRoom:", curentRoom)
+  ////console.log("IN emitCurentRoomChanged -- curentRoom:", curentRoom)
   socket.emit("CURENT_ROOM_CHANGED", curentRoom);
 };
 
 export const emitCurentIsMatched = (cr, isMatched, last2FlippedCards, have_has_word_idx) => {
-  console.log("IN emitCurentIsMatched -- cr:", cr)
-  console.log("IN emitCurentIsMatched -- last2FlippedCards:", last2FlippedCards)
-  console.log("IN emitCurentIsMatched -- isMatched:", isMatched)
+  ////console.log("IN emitCurentIsMatched -- cr:", cr)
+  ////console.log("IN emitCurentIsMatched -- last2FlippedCards:", last2FlippedCards)
+  ////console.log("IN emitCurentIsMatched -- isMatched:", isMatched)
 
   socket.emit("IS_MATCHED_CHANGED", cr, isMatched, last2FlippedCards, have_has_word_idx );
 };
@@ -48,23 +50,28 @@ export const emitHeartBeat = (playerName) => {
   socket.emit("HEART_BEAT", playerName);
 };
 
+
+
 export const updateCr = (setCr) => {
   socket.on("UPDATED_CURRENT_ROOM", (serverUpdatedCurentRoom) => {
-    console.log("clientSocketServices -- updateCr -- ON UPDATED_CURRENT_ROOM -- serverUpdatedCurentRoom: ", serverUpdatedCurentRoom)           
+console.log(
+  "777 -- clientSocketServices -- updateCr -- ON UPDATED_CURRENT_ROOM -- " +
+  "serverUpdatedCurentRoom.currentPlayers: ", serverUpdatedCurentRoom.currentPlayers)
+           
     setCr(serverUpdatedCurentRoom);
   });
 };
 
 export const updateDummyRoom = (setDummyRoom) => {
   socket.on("UPDATED_DUMMY_ROOM", (serverUpdatedDummyRoom) => {
-    console.log("clientSocketServices -- updateDummyRoom -- ON UPDATED_DUMMY_ROOM -- serverUpdatedDummyRoom: ", serverUpdatedDummyRoom);           
+    ////console.log("clientSocketServices -- updateDummyRoom -- ON UPDATED_DUMMY_ROOM -- serverUpdatedDummyRoom: ", serverUpdatedDummyRoom);           
     setDummyRoom(serverUpdatedDummyRoom);
   });
 };
 
 export const otherPlayerJoinedRoom = (setJoinedByOtherPlayerRoom) => {
   socket.on("NEW_PLAYER_JOINED_REAL_ROOM", (changedRoom) => {
-    console.log("clientSocketServices -- otherPlayerJoinedRoom -- ON NEW_PLAYER_JOINED_REAL_ROOM -- changedRoom: ", changedRoom);           
+    ////console.log("clientSocketServices -- otherPlayerJoinedRoom -- ON NEW_PLAYER_JOINED_REAL_ROOM -- changedRoom: ", changedRoom);           
     setJoinedByOtherPlayerRoom(changedRoom);
   });
 };
@@ -72,7 +79,7 @@ export const otherPlayerJoinedRoom = (setJoinedByOtherPlayerRoom) => {
 
 export const updatePlayerLeft = (setPlayerLeft) => {
   socket.on("PLAYER_LEFT_ROOM", (playerName) => {
-    console.log("clientSocketServices -- updatePlayerLeft -- ON-PLAYER_LEFT_ROOM -- playerName: ", playerName)
+    ////console.log("clientSocketServices -- updatePlayerLeft -- ON-PLAYER_LEFT_ROOM -- playerName: ", playerName)
     setPlayerLeft(playerName);
   });
 };
@@ -85,11 +92,11 @@ export const updateMatchedCards = (setMatchedCards) => {
 
 export const updateIsMatched = (setIsMatched, setLast2FlippedCards) => {
    
-    console.log("IN updateIsMatched -- ON-UPDATED_IS_MATCHED -- setIsMatched: ", setIsMatched)
-    console.log("")
+    ////console.log("IN updateIsMatched -- ON-UPDATED_IS_MATCHED -- setIsMatched: ", setIsMatched)
+    ////console.log("")
 
   socket.on("UPDATED_IS_MATCHED", (isMatched, last2FlippedCards, have_has_word_idx) => {
-    console.log("IN updateIsMatched -- ON-UPDATED_IS_MATCHED -- isMatched: ", isMatched)
+    ////console.log("IN updateIsMatched -- ON-UPDATED_IS_MATCHED -- isMatched: ", isMatched)
 
     setIsMatched(isMatched);
     setLast2FlippedCards(last2FlippedCards);
@@ -98,23 +105,23 @@ export const updateIsMatched = (setIsMatched, setLast2FlippedCards) => {
 
 export const updateCardSize = (setCardSize) => {
   socket.on("UPDATED_CARD_SIZE", (cardSize) => {
-    ////console.log("IN updateCardSize -- ON-UPDATED_CARD_SIZE -- cardSize: ", cardSize)
+    ////////console.log("IN updateCardSize -- ON-UPDATED_CARD_SIZE -- cardSize: ", cardSize)
     setCardSize(cardSize);
   });
 };
 
 export const removeUpdatedDummyRoomListener = () => {
-   console.log("removeUpdatedDummyRoomListener -- REMOVING SOCKET from UPDATED_DUMMY_ROOM")
+   ////console.log("removeUpdatedDummyRoomListener -- REMOVING SOCKET from UPDATED_DUMMY_ROOM")
    socket.off("UPDATED_DUMMY_ROOM");
 };
 
 export const removeUpdatedRoomDataListener = () => {
-  console.log("removeUpdatedRoomDataListener -- REMOVING SOCKET from UPDATED_CURRENT_ROOM")
+  ////console.log("removeUpdatedRoomDataListener -- REMOVING SOCKET from UPDATED_CURRENT_ROOM")
   socket.off("UPDATED_CURRENT_ROOM");
 };
 
 export const removeUpdatedChangedRoomListener = () => {
-  console.log("removeUpdatedChangedRoomListener -- REMOVING SOCKER from NEW_PLAYER_JOINED_REAL_ROOM")
+  ////console.log("removeUpdatedChangedRoomListener -- REMOVING SOCKER from NEW_PLAYER_JOINED_REAL_ROOM")
   socket.off("NEW_PLAYER_JOINED_REAL_ROOM");
 };
 
@@ -125,3 +132,20 @@ export const removeUpdatedMatchedCards = () => {
 export const removeUpdatedIsMatched = () => {
   socket.off("UPDATED_IS_MATCHED");
 };
+
+export const onGAME_CREATION_RES = (callback) => {
+  socket.on("GAME_CREATION_RES", callback);
+};
+
+export const removeGAME_CREATION_RESListener = () => {
+  socket.off("GAME_CREATION_RES");
+};
+
+export const emitCreateGame = (age, subject) => {
+  socket.emit("CREATE_GAME", { age, subject });
+};
+
+export function onUpdatedCurrentRoom(callback) {
+  socket.on('UPDATED_CURRENT_ROOM', callback);
+  return () => socket.off('UPDATED_CURRENT_ROOM', callback);
+}

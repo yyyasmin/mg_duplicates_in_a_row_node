@@ -5,6 +5,8 @@ const socket = require("socket.io");
 const cors = require("cors");
 const path = require("path");
 const isEmpty = require("./helpers/isEmpty");
+const { exec } = require("child_process");
+const fs = require('fs');
 
 const app = express();
 const server = http.Server(app);
@@ -26,6 +28,17 @@ const io = socket(server, {
 });
 
 app.use(express.static(path.join(__dirname, "public")));
+
+const testDir = path.join(__dirname, 'public', 'GameCards');
+const testFile = path.join(testDir, 'node_write_test.txt');
+
+try {
+  fs.writeFileSync(testFile, 'Node write test successful!', { flag: 'w' });
+  console.log('✅ Node can write to public/GameCards');
+  fs.unlinkSync(testFile); // Clean up after test
+} catch (err) {
+  console.error('❌ Node CANNOT write to public/GameCards:', err);
+}
 
 app.get("/database/Cards.json", (req, res) => {
   const filePath = path.join(__dirname, "database", "Cards.json");
@@ -60,7 +73,6 @@ app.post("/api/activeRooms", async (req, res) => {
 
     let updatedRooms = [];
     let activeRooms = getActiveRooms();
-console.log("IIIIIIIIIIIIIIIIN init -- activeRooms: ", activeRooms)
 
     rooms.forEach((room) => {
       const existingRoom = activeRooms.find((activeRoom) => activeRoom.id === room.id);
@@ -83,7 +95,6 @@ console.log("IIIIIIIIIIIIIIIIN init -- activeRooms: ", activeRooms)
     return res.status(500).json({ error: "Server error" });
   }
 });
-
 
 // SERVER URL
 const publicURL = process.env.RAILWAY_PUBLIC_URL || process.env.RAILWAY_STATIC_URL;

@@ -55,10 +55,9 @@ function LoginForm({ setUserName }) {
       });
 
       if (res.ok) {
-        const { token, userName } = await res.json();
-	  console.log("IN handleLogin -- server returned -- userName: ", userName)
+        const { userName } = await res.json();
+	  ////console.log("IN handleLogin -- server returned -- userName: ", userName)
 
-        localStorage.setItem("token", token);
         setUserName(userName);
 		navigate("/rooms")
         

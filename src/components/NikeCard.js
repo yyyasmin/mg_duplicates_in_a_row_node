@@ -27,14 +27,14 @@ const CardImage = styled.img`
 const NikeCard = (props) => {
   const { card, cardSize, faceType, frameColor, toggleCardFlip } = props;
   
-  console.log("IN NikeCard -- card: ", card)
+  ////console.log("IN NikeCard -- card: ", card)
 
   const [logoSize, setlogoSize] = useState({ width: 0, height: 0 });
   const [cardImageSize, setCardImageSize] = useState({ width: 0, height: 0 });
   
   // DUMMY CMDS - TO AVOID NOT USED VARS BUG
-  console.log("IN NickCard --  logoSize: ", logoSize)
-  console.log("IN NickCard --  cardImageSize: ", cardImageSize)
+  ////console.log("IN NickCard --  logoSize: ", logoSize)
+  ////console.log("IN NickCard --  cardImageSize: ", cardImageSize)
 
   const handleCardClick = () => {
     if (toggleCardFlip != null) {

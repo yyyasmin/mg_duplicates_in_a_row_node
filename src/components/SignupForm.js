@@ -54,7 +54,7 @@ const SuccessMsg = styled.p`
 `;
 
 function SignupForm() {
-  console.log("FORM RENDERED");
+  ////console.log("FORM RENDERED");
 
   //const [superUserCode, setSuperUserCode] = useState("");
   const [email, setEmail] = useState("");
@@ -67,7 +67,7 @@ function SignupForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("IN handleSubmit");
+    ////console.log("IN handleSubmit");
 
     setError("");
     setSuccess(false);

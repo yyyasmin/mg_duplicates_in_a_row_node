@@ -1,6 +1,6 @@
 export const shuffle = (cardsArr, importPathArr) => {
-  console.log("IN shuffle -- original cardsArr: ", cardsArr);
-  console.log("IN shuffle -- original importPathArr: ", importPathArr);
+  ////console.log("IN shuffle -- original cardsArr: ", cardsArr);
+  ////console.log("IN shuffle -- original importPathArr: ", importPathArr);
 
   // Step 1: Shuffle the pairs in parallel
   const indices = [...Array(cardsArr.length).keys()];
@@ -44,6 +44,6 @@ export const shuffle = (cardsArr, importPathArr) => {
     pairedCards[i].id = i;
   }
 
-  console.log("IN shuffle -- final pairedCards: ", pairedCards);
+  ////console.log("IN shuffle -- final pairedCards: ", pairedCards);
   return pairedCards;
 };

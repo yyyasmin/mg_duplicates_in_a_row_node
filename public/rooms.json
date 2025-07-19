@@ -57,16 +57,16 @@
   },
   {
     "id": "5",
-    "name": "למד מילים חדשות באנגלית - אוכל",
-    "linkTilte": "למידת אוכל באנגלית",
-    "gameName": "food",
+    "name": "Animals",
+    "linkTilte": "Learn about animals",
+    "gameName": "animals_5",
     "difficulty": 2,
     "maxMembers": 2,
     "currentPlayers": [],
     "startGame": false,
     "endGame": false,
     "info": "https://www.youtube.com/watch?v=example",
-    "frameColor": "#ff7675",
-    "imagePath": "/GameCards/food/foodBg.png"
+    "frameColor": "#4CAF50",
+    "imagePath": "/GameCards/animals_5/animals_5Bg.JPG"
   }
 ]

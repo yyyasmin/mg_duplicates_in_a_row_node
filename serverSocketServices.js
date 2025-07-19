@@ -1,6 +1,12 @@
-
 const isEmpty = require("./helpers/isEmpty");
+const path = require("path");
+const { exec } = require("child_process");
+const fs = require('fs');
+const ROOMS_PER_GAME = 7;
+const { CHOSEN_NODE_URL } = require("./helpers/ServerRoutes");
 let activeRooms = [];
+
+console.log("999 -- IN serverSocketServices.js -- GLOBAL -- activeRooms: ", activeRooms)
 
 function getActiveRooms() {
   return activeRooms;
@@ -8,15 +14,16 @@ function getActiveRooms() {
 
 function setActiveRooms(newData) {
   activeRooms = newData;
+  console.log("999 -- IN serverSocketServices.js -- setActiveRooms -- activeRooms: ", activeRooms)
   return activeRooms;
 }
 
 const emitMsgToRoomConnectedBeforeJoin = (io, msgType, updatedRoom) => {
   updatedRoom.currentPlayers.forEach((player) => {
-    console.log("EMITTING TO PLAYER", player.name, "msgType:", msgType);
-	console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDD")
-	console.log("DUMMYROOM: ", updatedRoom)
-	console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+    //console.log("EMITTING TO PLAYER", player.name, "msgType:", msgType);
+	//console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDD")
+	//console.log("DUMMYROOM: ", updatedRoom)
+	//console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDD")
 
     io.to(player.socketId).emit(msgType, updatedRoom);
   });
@@ -28,8 +35,8 @@ const notifyConnectedBeforeJoin = (io, playerName, joinedRoom) => {
 
   if (dummyRoom === -1) return;
   
-  console.log("IN notifyConnectedBeforeJoin -- dummyRoom: ",dummyRoom )
-  console.log("IN activeRooms -- dummyRoom: ",activeRooms )
+  //console.log("IN notifyConnectedBeforeJoin -- dummyRoom: ",dummyRoom )
+  //console.log("IN activeRooms -- dummyRoom: ",activeRooms )
 
   dummyRoom.currentPlayers.forEach((player) => {
     const socketId = player.socketId;
@@ -51,6 +58,7 @@ const notifyConnectedBeforeJoin = (io, playerName, joinedRoom) => {
 
 const emitMsgToRoomPlayers = (io, msgType, updatedRoom) => {
   updatedRoom.currentPlayers.forEach((player) => {
+  console.log("888 -- emitMsgToRoomPlayers -- player:", player)
     io.to(player.socketId).emit(msgType, updatedRoom);
   });
 };
@@ -167,9 +175,14 @@ const addPlayerToRoom = (roomToAddPlayer, playerName, socketId) => {
     let availableRoomIdx = getRoomIdxFromActiveRoomsByRoomURL(roomToAddPlayer.roomURL)
     let availableRoom = activeRooms[availableRoomIdx]
 	if (isEmpty(availableRoom))  {
+        //console.error("Room not found in activeRooms:", roomToAddPlayer.roomURL);
+        return -1;
 	}
     let currentPlayersNewCopy = [...availableRoom.currentPlayers]
-    currentPlayersNewCopy.push(newPlayer)
+    // Only add if not already present
+    if (!currentPlayersNewCopy.some(p => p.socketId === newPlayer.socketId)) {
+      currentPlayersNewCopy.push(newPlayer)
+    }
 
     roomToAddPlayerNewCopy = { ...availableRoom, currentPlayers:currentPlayersNewCopy };
     if (roomToAddPlayerNewCopy.currentPlayers.length === roomToAddPlayerNewCopy.maxMembers) {
@@ -190,6 +203,31 @@ const removeRoomFromActiveRooms = (roomId) => {
   }
   else {
 	  return -1
+  }
+};
+
+const addNewGameToActiveRooms = (roomsData) => {
+  try {
+    const newRooms = roomsData.flatMap(room => 
+      Array.from({length: ROOMS_PER_GAME}, (_, i) => ({
+        ...room, 
+        id: `${room.id}-${i}`, 
+        roomURL: `${CHOSEN_NODE_URL}/room/${room.id}-${i}`, 
+        currentPlayers: [], 
+        startGame: false, 
+        endGame: false, 
+        cardsData: []
+      }))
+    );
+    
+    newRooms.forEach(room => {
+      if (!activeRooms.find(r => r.id === room.id)) {
+        activeRooms.push(room);
+        //console.log("✅ Added new room to activeRooms:", room.id);
+      }
+    });
+  } catch (error) {
+    //console.error("❌ Error updating activeRooms after game generation:", error);
   }
 };
 
@@ -226,9 +264,46 @@ const serverSocketServices = (io) => {
       handleHeartBeat(playerName);
     });
 
+    socket.on("CREATE_GAME", ({ age, subject }) => {
+		
+//console.log("🔍 serverSocketServices: CREATE_GAME received - age:", age, "subject:", subject)
+
+      const pythonScriptPath = path.join(__dirname, "public", "file_creation_helpers", "game_generator.py");
+      const command = `python "${pythonScriptPath}" "${age}" "${subject}"`;
+//console.log("🔍 serverSocketServices: Executing command:", command)
+
+      exec(command, (error, stdout, stderr) => {
+        //console.log("🔍 serverSocketServices: Python script completed");
+        //console.log("🔍 serverSocketServices: stdout:", stdout);
+        //console.log("🔍 serverSocketServices: stderr:", stderr);
+        
+        if (error) {
+          //console.error("❌ serverSocketServices: Python script error:", error);
+          //console.error("❌ serverSocketServices: Error code:", error.code);
+          //console.error("❌ serverSocketServices: Error signal:", error.signal);
+          io.emit("GAME_CREATION_RES", { success: false, error: stderr || error.message });
+          return;
+        }
+        
+        //console.log("✅ serverSocketServices: Python script completed successfully");
+        //console.log("✅ serverSocketServices: Output:", stdout);
+
+        // Add new rooms to activeRooms after game generation
+        try {
+          const roomsData = JSON.parse(fs.readFileSync(path.join(__dirname, "public", "rooms.json"), 'utf8'));
+          addNewGameToActiveRooms(roomsData);
+        } catch (error) {
+          //console.error("❌ Error updating activeRooms after game generation:", error);
+        }
+
+        io.emit("GAME_CREATION_RES", { success: true, message: "Game generated successfully!", output: stdout });
+      });
+
+    });
+
 	
  socket.on("ASIGN_DUMMY_ROOM", ({ dummyRoom, playerName }) => {
-	 let updatedRoom = { ...setAvailableRoomInActiveRooms(dummyRoom) };
+	 let updatedRoom = setAvailableRoomInActiveRooms(dummyRoom);
 
 	 if (updatedRoom === -1) {
       return;
@@ -238,14 +313,17 @@ const serverSocketServices = (io) => {
       ...addPlayerToRoom(updatedRoom, playerName, socket.id),
 	 };
 
-console.log("ASIGN_DUMMY_ROOM -- dummyRoom:", dummyRoom);
+//console.log("ASIGN_DUMMY_ROOM -- dummyRoom:", dummyRoom);
 
-	 emitMsgToRoomConnectedBeforeJoin(io, "ASIGN_DUMMY_ROOM", updatedRoom);
+	 //emitMsgToRoomConnectedBeforeJoin(io, "ASIGN_DUMMY_ROOM", updatedRoom);
+	 emitMsgToRoomConnectedBeforeJoin(io, "UPDATED_DUMMY_ROOM", updatedRoom);
 
  });
-
-	
+ 
  socket.on("CREATE_ROOM_AND_ADD_PLAYER", ({ chosenRoom, playerName }) => {
+  console.log("444 -- onCREATE_ROOM_AND_ADD_PLAYER -- chosenRoom:", chosenRoom)
+  console.log("555 -- onCREATE_ROOM_AND_ADD_PLAYER -- playerName:", playerName)
+
    let updatedRoom = { ...setAvailableRoomInActiveRooms(chosenRoom) };
    if (updatedRoom === -1) {
     return;
@@ -253,11 +331,14 @@ console.log("ASIGN_DUMMY_ROOM -- dummyRoom:", dummyRoom);
    updatedRoom = {
     ...addPlayerToRoom(updatedRoom, playerName, socket.id),
    };
+   console.log("666 -- onCREATE_ROOM_AND_ADD_PLAYER -- updatedRoom.currentPlayers:", updatedRoom.currentPlayers)
 
+   console.log("20-20-20 -- serverSocketServices.js -- CREATE_ROOM_AND_ADD_PLAYER -- emitting UPDATED_CURRENT_ROOM to room:", updatedRoom.id, "currentPlayers:", updatedRoom.currentPlayers);
    emitMsgToRoomPlayers(io, "UPDATED_CURRENT_ROOM", updatedRoom);
    // 👇 Notify dummy room users about the new player in a real room
    notifyConnectedBeforeJoin(io, playerName, updatedRoom);
  });
+ 
 
 
     socket.on("REMOVE_PLAYER_FROM_ROOM", ( {requestedRoom, playerName} ) => {
@@ -297,6 +378,7 @@ console.log("ASIGN_DUMMY_ROOM -- dummyRoom:", dummyRoom);
         }
       }
       emitMsgToRoomPlayers(io, "PLAYER_LEFT_ROOM", updatedRoom)
+      console.log("21-21-21 -- serverSocketServices.js -- REMOVE_PLAYER_FROM_ROOM -- emitting UPDATED_CURRENT_ROOM to room:", updatedRoom.id, "currentPlayers:", updatedRoom.currentPlayers);
       emitMsgToRoomPlayers(io, "UPDATED_CURRENT_ROOM", updatedRoom)
     }) // END REMOVE_PLAYER_FROM_ROOM
 
@@ -307,6 +389,7 @@ console.log("ASIGN_DUMMY_ROOM -- dummyRoom:", dummyRoom);
 
     socket.on("CURENT_ROOM_CHANGED", (updatedRoom) => {
 	  updateActiveRoomsWithUpdatedRoom(updatedRoom);
+      console.log("22-22-22 -- serverSocketServices.js -- CURENT_ROOM_CHANGED -- emitting UPDATED_CURRENT_ROOM to room:", updatedRoom.id, "currentPlayers:", updatedRoom.currentPlayers);
       emitMsgToRoomPlayers(io, "UPDATED_CURRENT_ROOM", updatedRoom);
     });
 
@@ -323,6 +406,35 @@ console.log("ASIGN_DUMMY_ROOM -- dummyRoom:", dummyRoom);
 	
   });
 	
+};
+
+// Function to check if rooms.json was updated
+const checkRoomsJsonUpdate = (gameName) => {
+  try {
+    const roomsPath = path.join(__dirname, "public", "rooms.json");
+    //console.log("🔍 checkRoomsJsonUpdate: Checking rooms.json at:", roomsPath);
+    
+    if (!fs.existsSync(roomsPath)) {
+      //console.error("❌ checkRoomsJsonUpdate: rooms.json does not exist!");
+      return false;
+    }
+    
+    const roomsData = JSON.parse(fs.readFileSync(roomsPath, 'utf8'));
+    //console.log("🔍 checkRoomsJsonUpdate: Current rooms.json has", roomsData.length, "games");
+    
+    const gameExists = roomsData.some(room => room.gameName === gameName);
+    //console.log("🔍 checkRoomsJsonUpdate: Game", gameName, "exists in rooms.json:", gameExists);
+    
+    if (gameExists) {
+      const gameRoom = roomsData.find(room => room.gameName === gameName);
+      //console.log("✅ checkRoomsJsonUpdate: Found game in rooms.json:", gameRoom);
+    }
+    
+    return gameExists;
+  } catch (error) {
+    //console.error("❌ checkRoomsJsonUpdate: Error checking rooms.json:", error);
+    return false;
+  }
 };
 
 module.exports = {getActiveRooms, setActiveRooms,activeRooms, serverSocketServices};
