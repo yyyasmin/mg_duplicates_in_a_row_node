@@ -24,8 +24,8 @@ export const BROWSER_RENDER_URL = "https://mgduplicatesrowreact.netlify.app/"
 ////// CHOSE ENVIROMENT VARS //////
  
 // Switch between local and render here
-const USE_LOCAL = true;
-//const USE_LOCAL = false;
+//const USE_LOCAL = true;
+const USE_LOCAL = false;
 
 // Export chosen URLs for use in frontend
 export const CHOSEN_NODE_URL = USE_LOCAL ? NODE_PROXY_URL : NODE_RENDER_URL;
