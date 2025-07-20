@@ -27,13 +27,13 @@ const CardImage = styled.img`
 const NikeCard = (props) => {
   const { card, cardSize, faceType, frameColor, toggleCardFlip } = props;
   
-  ////console.log("IN NikeCard -- card: ", card)
 
   // Removed unused state variables logoSize and cardImageSize
 
-  // DUMMY CMDS - TO AVOID NOT USED VARS BUG
-  ////console.log("IN NickCard --  logoSize: ", logoSize)
-  ////console.log("IN NickCard --  cardImageSize: ", cardImageSize)
+  // DUMMY CMDS - TO AVOID NOT USED VARS BUG IN NETIFLY
+  console.log("IN NikeCard -- card: ", card)
+  console.log("IN NickCard --  logoSize: ", logoSize)
+  console.log("IN NickCard --  cardImageSize: ", cardImageSize)
 
   const handleCardClick = () => {
     if (toggleCardFlip != null) {
