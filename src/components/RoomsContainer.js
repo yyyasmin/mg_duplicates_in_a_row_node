@@ -87,7 +87,7 @@ const RoomsContainer = ({ userName, roomsInitialData, refreshRooms }) => {
     return () => {
       removeGAME_CREATION_RESListener();
     };
-  }, []); // Removed refreshRooms dependency to prevent re-rendering
+  }, [refreshRooms]);
 
   const handleCreateGame = async () => {
     const gameSubject = subject === "other" ? customSubject : subject;

@@ -29,9 +29,8 @@ const NikeCard = (props) => {
   
   ////console.log("IN NikeCard -- card: ", card)
 
-  const [logoSize, setlogoSize] = useState({ width: 0, height: 0 });
-  const [cardImageSize, setCardImageSize] = useState({ width: 0, height: 0 });
-  
+  // Removed unused state variables logoSize and cardImageSize
+
   // DUMMY CMDS - TO AVOID NOT USED VARS BUG
   ////console.log("IN NickCard --  logoSize: ", logoSize)
   ////console.log("IN NickCard --  cardImageSize: ", cardImageSize)
@@ -45,9 +44,9 @@ const NikeCard = (props) => {
   const handleImageLoad = (e, type) => {
     const { naturalWidth, naturalHeight } = e.target;
     if (type === "logo") {
-      setlogoSize({ width: naturalWidth, height: naturalHeight });
+      // setlogoSize({ width: naturalWidth, height: naturalHeight }); // This line was removed
     } else {
-      setCardImageSize({ width: naturalWidth, height: naturalHeight });
+      // setCardImageSize({ width: naturalWidth, height: naturalHeight }); // This line was removed
     }
   };
 

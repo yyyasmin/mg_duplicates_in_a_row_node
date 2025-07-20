@@ -40,7 +40,7 @@ function App() {
       console.error("❌ App.js: refreshRooms - Full error object:", error);
       // Don't re-throw - just log the error
     }
-  }, [userName, dataIsSet]);
+  }, []);
 
   useEffect(() => {
     ////console.log("🔍 App.js: userName changed to:", userName);
