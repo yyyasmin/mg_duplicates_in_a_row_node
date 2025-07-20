@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import ReactCardFlip from "react-card-flip";
 
@@ -40,26 +39,14 @@ const NikeCard = (props) => {
     }
   };
 
-  const handleImageLoad = (e, type) => {
-    //const { naturalWidth, naturalHeight } = e.target;
-// DUMMY CMDS - TO AVOID NOT USED VARS BUG IN NETIFLY
-//console.log("IN NikeCard -- naturalWidth: ", naturalWidth)
-//console.log("IN NikeCard -- naturalHeight: ", naturalHeight)
-    if (type === "logo") {
-      // setlogoSize({ width: naturalWidth, height: naturalHeight }); // This line was removed
-    } else {
-      // setCardImageSize({ width: naturalWidth, height: naturalHeight }); // This line was removed
-    }
-  };
-
   return (
     <ReactCardFlip isFlipped={faceType === "back"}>
       <CardContainer cardSize={cardSize} frameColor={frameColor} onClick={handleCardClick}>
-<CardImage src={card.imagePath1} alt={card.name} onLoad={(e) => handleImageLoad(e, "card")} />
+<CardImage src={card.imagePath1} alt={card.name}/>
       </CardContainer>
 
       <CardContainer cardSize={cardSize} frameColor={frameColor} onClick={handleCardClick}>
-        <CardImage src="/logo.PNG" alt={card.name} onLoad={(e) => handleImageLoad(e, "logo")} />
+        <CardImage src="/logo.PNG" alt={card.name} />
       </CardContainer>
     </ReactCardFlip>
   );
