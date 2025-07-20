@@ -1,0 +1,35 @@
+Workspace Rules:
+- Keep code simple and clean, no fancy code if not necessary
+
+- Add new trigger buttons in parent pages for new features
+
+- keep the same files structure as all other features do
+
+- Never harm or break existing working functionality
+
+- Scan for existing files/function that have the same role before creating new ones
+
+- Use proxyServer for all requests with same authentication pattern
+
+- Use localStorage token + cookies fallback for auth
+
+- make a debugging popup for every request and response
+both should include popup type , popup number , popup title , full request url and full data object , including payload and headers
+in case of response -
+it should include:
+full request url that it response to
+full response data - espacialy response message
+it should pop regardless if its sucsess or failure response
+red for fail, green for sucsess
+
+- add a file that explains the new featute flow in a file that makes an excel table and explains the flow using this table in docs folder
+each row should inclue:
+file , function ( in which it is in) , role , code line from my actual code ( not genral!) that demonstarte how it is implemanted
+
+fixes:
+- no falback - in case of invalid value make a detailed error message
+- no workaround , only real fix of thr root of thr bug cause
+- any fix in useEffect - make sure it doesnt make it
+stuck an infinit loop and it keeps all working functionality. 
+
+

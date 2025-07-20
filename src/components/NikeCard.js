@@ -32,8 +32,7 @@ const NikeCard = (props) => {
 
   // DUMMY CMDS - TO AVOID NOT USED VARS BUG IN NETIFLY
   console.log("IN NikeCard -- card: ", card)
-  console.log("IN NickCard --  logoSize: ", logoSize)
-  console.log("IN NickCard --  cardImageSize: ", cardImageSize)
+
 
   const handleCardClick = () => {
     if (toggleCardFlip != null) {
@@ -42,7 +41,10 @@ const NikeCard = (props) => {
   };
 
   const handleImageLoad = (e, type) => {
-    const { naturalWidth, naturalHeight } = e.target;
+    //const { naturalWidth, naturalHeight } = e.target;
+// DUMMY CMDS - TO AVOID NOT USED VARS BUG IN NETIFLY
+//console.log("IN NikeCard -- naturalWidth: ", naturalWidth)
+//console.log("IN NikeCard -- naturalHeight: ", naturalHeight)
     if (type === "logo") {
       // setlogoSize({ width: naturalWidth, height: naturalHeight }); // This line was removed
     } else {
