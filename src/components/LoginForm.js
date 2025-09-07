@@ -1,3 +1,4 @@
+// src/components/LoginForm.js
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -40,54 +41,48 @@ const ErrorMsg = styled.p`
   font-size: 14px;
 `;
 
-function LoginForm({ setUserName }) {
+function LoginForm({ setUserEmail }) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleSubmit = async () => {
+    if (!email) {
+      setError("Please enter an email.");
+      return;
+    }
     try {
-      const res = await fetch(`${CHOSEN_FLASK_URL}/auth/login`, {
+console.log("CHOSEN_FLASK_URL: ", `${CHOSEN_FLASK_URL}/auth/signup`)
+      const res = await fetch(`${CHOSEN_FLASK_URL}/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email }),
       });
 
+      const data = await res.json();
       if (res.ok) {
-        const { userName } = await res.json();
-	  ////console.log("IN handleLogin -- server returned -- userName: ", userName)
-
-        setUserName(userName);
-		navigate("/rooms")
-        
+        setUserEmail(data.email);
+        navigate("/rooms");
       } else {
-        setError("Invalid login credentials, please try again.");
+        setError(data.error || "There was a problem saving your email. Please try again.");
       }
     } catch (error) {
-      console.error("Login error", error);
-      setError("There was an error logging in. Please try again.");
+      console.error("Error saving email", error);
+      setError("There was an error. Please try again.");
     }
   };
 
   return (
     <FormContainer>
-      <h2>Login</h2>
+      <h2>Enter Email</h2>
       <Input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <Input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
       {error && <ErrorMsg>{error}</ErrorMsg>}
-      <Button onClick={handleLogin}>Login</Button>
-      <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+      <Button onClick={handleSubmit}>Continue</Button>
     </FormContainer>
   );
 }

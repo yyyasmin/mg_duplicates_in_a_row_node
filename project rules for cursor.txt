@@ -13,14 +13,29 @@ Workspace Rules:
 
 - Use localStorage token + cookies fallback for auth
 
-- make a debugging popup for every request and response
-both should include popup type , popup number , popup title , full request url and full data object , including payload and headers
-in case of response -
-it should include:
-full request url that it response to
-full response data - espacialy response message
-it should pop regardless if its sucsess or failure response
-red for fail, green for sucsess
+- make a debugging popup for every request and response ( no more than one for each , exactly one!)
+they should use the centralized popup service and contain:
+  REQUEST:
+    color: blue
+	popup type (REQUEST)
+	popup number
+	popup title
+	file
+	function
+	line number	
+	full request URL ( the actual exact string that is sent to the target server) 
+	full data object , including payload and headers
+  RESPONSE:
+    color: red for failure , green for sucsess
+	popup type (RESPONSE)
+	popup number
+	popup title
+	file
+	function
+	line number	
+	full request URL ( the actual exact string that is sent to the target server - in the reequest that this responses to) 
+	full data object , including payload and headers that the server returned
+
 
 - add a file that explains the new featute flow in a file that makes an excel table and explains the flow using this table in docs folder
 each row should inclue:

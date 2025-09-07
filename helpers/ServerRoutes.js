@@ -7,6 +7,7 @@ const FLASK_RENDER_URL = "https://mgduplicatrsinarowflask-production.up.railway.
 const BROWSER_RENDER_URL = "https://mgduplicatesrowreact.netlify.app/";
 
 const USE_LOCAL = true;
+//const USE_LOCAL = false;
 
 const CHOSEN_NODE_URL = USE_LOCAL ? NODE_PROXY_URL : NODE_RENDER_URL;
 const CHOSEN_FLASK_URL = USE_LOCAL ? FLASK_PROXY_URL : FLASK_RENDER_URL;
